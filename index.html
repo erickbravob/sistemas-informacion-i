@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#14283b">
-  <meta name="description" content="Apuntes y conceptos diarios de Sistemas de Información I.">
+  <meta name="description" content="Cuaderno navegable de conceptos y ruta de proyecto final de Sistemas de Información I.">
   <title>Sistemas de Información I · Cuaderno</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,69 +12,44 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header class="topbar">
-    <a class="brand" href="#inicio" aria-label="Ir al inicio"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span>Sistemas de Información <b>I</b></span></a>
-    <nav aria-label="Navegación principal"><a href="#conceptos">Conceptos</a><a href="#jornadas">Jornadas</a><a href="#bitacora">Bitácora</a></nav>
-    <span class="edition"><span class="live-dot"></span> CUADERNO DE CLASE</span>
+  <header class="masthead">
+    <div class="topline">
+      <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="sidebar" aria-label="Abrir temario"><span></span><span></span></button>
+      <a class="brand" href="#inicio" aria-label="Inicio del cuaderno"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span>Sistemas de Información <b>I</b></span></a>
+      <nav class="topnav" aria-label="Secciones"><a href="#inicio">Inicio</a><a href="#ruta">Proyecto final</a></nav>
+      <span class="edition"><i></i> CUADERNO DE CLASE</span>
+    </div>
+    <div class="search-row">
+      <label class="search-box">
+        <span class="search-icon" aria-hidden="true">⌕</span>
+        <input id="global-search" type="search" placeholder="Buscar un tema, concepto o palabra…" autocomplete="off" aria-label="Buscar en todo el cuaderno">
+        <button id="clear-search" class="clear-search" type="button" aria-label="Limpiar búsqueda" hidden>×</button>
+        <kbd>/</kbd>
+      </label>
+      <span class="search-tip">Búsqueda disponible en cualquier tema</span>
+      <div class="search-results" id="search-results" role="listbox" aria-label="Resultados de búsqueda" hidden></div>
+    </div>
   </header>
 
-  <main id="inicio">
-    <section class="hero" aria-labelledby="page-title">
-      <div class="hero-copy">
-        <p class="eyebrow"><span class="eyebrow-line"></span> APUNTES EN CONSTRUCCIÓN <span id="current-date"></span></p>
-        <h1 id="page-title">Entender las partes.<br><em>Ver el sistema.</em></h1>
-        <p class="hero-description">Un espacio de consulta para los conceptos, actividades y avances de Sistemas de Información I. Cada jornada suma una nueva capa al cuaderno.</p>
-        <a class="hero-link" href="#conceptos">Explorar conceptos <span aria-hidden="true">↘</span></a>
+  <div class="workspace">
+    <aside class="sidebar" id="sidebar" aria-label="Temario y ayuda">
+      <div class="sidebar-intro">
+        <span class="sidebar-kicker">SISTEMAS DE INFORMACIÓN I</span>
+        <p>Temario de consulta</p>
+        <span class="sidebar-subtitle">02 oct 2026 <i></i> 22 conceptos</span>
       </div>
-      <div class="system-figure" aria-label="Diagrama de entradas, proceso, salidas y retroalimentación">
-        <div class="figure-caption">UN SISTEMA, EN POCAS PALABRAS <span>01 / 04</span></div>
-        <div class="system-flow">
-          <div class="flow-node"><small>01</small><b>Entradas</b><span>datos · recursos</span></div>
-          <span class="flow-arrow">→</span>
-          <div class="flow-node flow-process"><small>02</small><b>Proceso</b><span>transformación</span></div>
-          <span class="flow-arrow">→</span>
-          <div class="flow-node"><small>03</small><b>Salidas</b><span>resultados</span></div>
-        </div>
-        <div class="feedback"><span class="feedback-line"></span><span>04 &nbsp; RETROALIMENTACIÓN</span><span class="feedback-line"></span></div>
-        <div class="figure-note"><span class="figure-pulse"></span> Las partes se relacionan para alcanzar un objetivo.</div>
-      </div>
-      <div class="hero-foot"><span>REGISTRO ACADÉMICO</span><span>01 JORNADA</span><span>08 TEMAS</span></div>
-    </section>
+      
+      <nav class="topic-nav" id="topic-nav" aria-label="Temas por categoría"></nav>
+      <a class="project-link" href="#ruta"><span class="project-icon" aria-hidden="true">↗</span><span><b>Proyecto final</b><small>Ruta de trabajo sugerida</small></span></a>
+      <div class="sidebar-help"><span class="help-mark">?</span><p>Busca en cualquier momento con <kbd>/</kbd>. Escribe una palabra o parte del tema.</p></div>
+    </aside>
 
-    <section class="overview" aria-label="Resumen del cuaderno">
-      <div class="overview-intro"><span class="section-index">01 — PANORAMA</span><h2>Lo que llevamos</h2></div>
-      <div class="overview-stat"><strong id="topic-count">—</strong><span>temas registrados</span></div>
-      <div class="overview-stat"><strong id="day-count">—</strong><span>jornada documentada</span></div>
-      <div class="overview-stat status-stat"><span class="status-chip"><i></i> EN REVISIÓN</span><span>pendiente de contrastar con el material de clase</span></div>
-    </section>
+    <main class="content" id="main-content">
+      <div id="page-content" tabindex="-1" aria-live="polite"></div>
+      <footer class="page-footer"><span>Sistemas de Información I</span><span>Apuntes en revisión · jornada 02 oct 2026</span></footer>
+    </main>
+  </div>
 
-    <section class="concept-section" id="conceptos" aria-labelledby="concepts-title">
-      <div class="section-heading">
-        <div><span class="section-index">02 — CONSULTA</span><h2 id="concepts-title">Conceptos</h2><p>Busca por palabra o filtra por tema. Abre una tarjeta para leer su definición.</p></div>
-        <span class="heading-count" id="visible-count">0 CONCEPTOS</span>
-      </div>
-      <div class="toolbar">
-        <label class="search-box"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Buscar un concepto…" autocomplete="off" aria-label="Buscar conceptos"><kbd>/</kbd></label>
-        <div class="filters" id="filters" aria-label="Filtrar por categoría"></div>
-      </div>
-      <div class="concept-layout">
-        <div class="concept-results" id="concept-results" aria-live="polite"></div>
-        <aside class="day-rail" id="jornadas">
-          <span class="section-index">JORNADAS</span>
-          <div id="day-list"></div>
-          <div class="rail-note"><span class="note-pin"></span><p>Las síntesis están marcadas como <b>iniciales</b> hasta revisarlas con el material del docente.</p></div>
-        </aside>
-      </div>
-      <p class="empty-state" id="empty-state" hidden>No encontramos conceptos con esos filtros. Prueba otra palabra.</p>
-    </section>
-
-    <section class="log-section" id="bitacora">
-      <div class="log-label"><span class="section-index">03 — BITÁCORA</span><span class="log-date">VIERNES · 02 OCT 2026</span></div>
-      <div class="log-content"><h2>Primera jornada</h2><p>Inicio del registro de la materia y organización de los conceptos básicos de sistemas. Se añadieron definiciones, clasificaciones y un ejemplo aplicado a la inscripción universitaria.</p><div class="log-footer"><span>08 ACTIVIDADES REGISTRADAS</span><span>ESTADO: EN CURSO</span></div></div>
-    </section>
-  </main>
-
-  <footer><a class="brand footer-brand" href="#inicio"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span>Sistemas de Información <b>I</b></span></a><span>Cuaderno académico · actualización por jornada</span><a href="#inicio">Volver arriba ↑</a></footer>
   <script src="conceptos.js"></script>
   <script src="app.js"></script>
 </body>
