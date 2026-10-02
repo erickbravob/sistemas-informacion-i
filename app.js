@@ -119,6 +119,18 @@ function diagramFor(item) {
     case 'homeostasis':
       graphic = '<div class="balance-graphic"><div class="change-input"><span>Condiciones externas</span><b>cambian</b></div><span class="big-arrow">→</span><div class="regulator"><small>AJUSTE</small><b>Autorregulación</b></div><span class="big-arrow">→</span><div class="stable-range"><small>FUNCIONAMIENTO</small><b>Rango estable</b></div></div>';
       break;
+    case 'environment':
+      graphic = '<div class="environment-graphic"><div class="outside-zone"><small>MEDIO AMBIENTE</small><span>Personas · reglas · recursos</span><div class="system-boundary environment-boundary"><b>SISTEMA</b><div class="env-flow"><span>entrada ↘</span><strong>Proceso</strong><span>↗ resultado</span></div><small>límite de análisis</small></div><span>↖ efectos hacia el entorno</span></div></div>';
+      break;
+    case 'attributes':
+      graphic = '<div class="attribute-grid"><div class="attribute-card is-active"><span>CUANTITATIVO</span><b>Se cuenta o mide</b><small>Ej.: 120 estudiantes<br>2 s de respuesta</small></div><div class="attribute-card"><span>CUALITATIVO</span><b>Se describe</b><small>Ej.: facilidad de uso<br>mensaje claro</small></div></div><p class="diagram-note">Define cómo observarás cada atributo.</p>';
+      break;
+    case 'relations':
+      graphic = '<div class="relation-network"><div class="relation-center">Inscripción</div><span class="relation-edge edge-one">estudiante</span><span class="relation-edge edge-two">materia y cupos</span><span class="relation-edge edge-three">requisitos</span><span class="relation-edge edge-four">resultado</span></div><p class="diagram-note">Las conexiones hacen que un cambio pueda afectar otras partes.</p>';
+      break;
+    case 'regulation':
+      graphic = '<div class="regulation-loop"><div class="reg-step"><small>01 · OBJETIVO</small><b>Cupo máximo</b></div><span>→</span><div class="reg-step"><small>02 · OBSERVAR</small><b>Inscripciones actuales</b></div><span>→</span><div class="reg-step is-active"><small>03 · COMPARAR</small><b>¿Hay cupo?</b></div><span>→</span><div class="reg-step"><small>04 · AJUSTAR</small><b>Avisar o bloquear</b></div><span class="reg-return">↶ retroalimentación</span></div>';
+      break;
     case 'feedback':
       graphic = '<div class="feedback-graphic"><div class="loop-node">Sistema</div><span>resultado</span><div class="loop-node loop-result">Información</div><span>ajuste</span><div class="loop-node">Sistema</div></div><p class="diagram-note">El resultado vuelve como información para orientar una corrección.</p>';
       break;
