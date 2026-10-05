@@ -170,7 +170,10 @@ function renderCalendar() {
 
 function renderDayDetail() {
   const detail = document.querySelector('#calendar-day-detail');
-  const dayConcepts = concepts.filter((item) => item.day === selectedClassDay);
+  if (!selectedClassDay) {
+    detail.innerHTML = '<div class="calendar-empty-state"><span class="section-index">SIN REGISTROS ESTE MES</span><p>Aún no hay apuntes asociados a una jornada de clase para este mes.</p></div>';
+    return;
+  }  const dayConcepts = concepts.filter((item) => item.day === selectedClassDay);
   const categoriesForDay = [...new Set(dayConcepts.map((item) => item.category))];
   const summaries = {
     '2026-10-02': {
@@ -313,7 +316,10 @@ document.addEventListener('click', (event) => {
   const monthButton = event.target.closest('[data-calendar-step]');
   if (monthButton) {
     calendarMonth.setMonth(calendarMonth.getMonth() + Number(monthButton.dataset.calendarStep));
+    const monthKey = calendarMonth.getFullYear() + '-' + String(calendarMonth.getMonth() + 1).padStart(2, '0');
+    selectedClassDay = classDays.find((day) => day.startsWith(monthKey)) || '';
     renderCalendar();
+    renderDayDetail();
     return;
   }
   const dayButton = event.target.closest('[data-class-day]');
