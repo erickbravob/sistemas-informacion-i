@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=2026-10-05-002">
+  <link rel="stylesheet" href="styles.css?v=2026-10-05-006">
 </head>
 <body>
   <header class="masthead">
@@ -36,17 +36,18 @@
       <div class="sidebar-intro">
         <span class="sidebar-kicker">SISTEMAS DE INFORMACIÓN I</span>
         <p>Temario de consulta</p>
-        <span class="sidebar-subtitle">02 oct 2026 <i></i> 27 conceptos</span>
+        <span class="sidebar-subtitle"><span id="latest-class-date">02 oct 2026</span><i></i><span id="topic-count">27 conceptos</span></span>
       </div>
 
       <nav class="topic-nav" id="topic-nav" aria-label="Temas por categoría"></nav>
       <a class="project-link" href="#ruta"><span class="project-icon" aria-hidden="true">↗</span><span><b>Proyecto final</b><small>Ruta de trabajo sugerida</small></span></a>
+      <a class="project-link activity-link" href="#actividad-1"><span class="project-icon" aria-hidden="true">✓</span><span><b>Actividad 1</b><small>Guía y lista de avance</small></span></a>
       <div class="sidebar-help"><span class="help-mark">?</span><p>Busca en cualquier momento con <kbd>/</kbd>. Escribe una palabra o parte del tema.</p></div>
     </aside>
 
     <main class="content" id="main-content">
       <div id="page-content" tabindex="-1" aria-live="polite"></div>
-      <footer class="page-footer"><span>Sistemas de Información I</span><span>Apuntes en revisión · jornada 02 oct 2026</span></footer>
+      <footer class="page-footer"><span>Sistemas de Información I</span><span id="footer-course-progress">Apuntes en revisión · calendario por jornada</span></footer>
     </main>
   </div>
 
@@ -60,9 +61,7 @@
       <button class="dialog-done" type="button" data-close-highlight>Entendido</button>
     </div>
   </dialog>
-  <script src="conceptos.js?v=2026-10-05-002"></script>
-  <script src="app.js?v=2026-10-05-002"></script>
+  <script src="conceptos.js?v=2026-10-05-006"></script>
+  <script src="app.js?v=2026-10-05-006"></script>
 </body>
 </html>
-
-

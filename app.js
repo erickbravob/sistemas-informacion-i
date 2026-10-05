@@ -28,7 +28,16 @@ function topicLink(item, extraClass) {
   return '<a class="' + (extraClass || '') + '" href="#' + escapeHtml(item.slug) + '">' + escapeHtml(item.title) + '</a>';
 }
 
+function formatShortDate(day) {
+  if (!day) return 'sin fecha';
+  const [year, month, date] = day.split('-');
+  return Number(date) + ' ' + monthNames[Number(month) - 1].slice(0, 3) + ' ' + year;
+}
 function renderTopicNav() {
+  const latestClassDay = classDays[classDays.length - 1];
+  document.querySelector('#latest-class-date').textContent = formatShortDate(latestClassDay);
+  document.querySelector('#topic-count').textContent = concepts.length + ' conceptos';
+  document.querySelector('#footer-course-progress').textContent = 'Apuntes en revisión · última clase ' + formatShortDate(latestClassDay);
   topicNav.innerHTML = categories.map((category) => {
     const items = concepts.filter((item) => item.category === category);
     const isOpen = activeCategory ? activeCategory === category : category === 'Fundamentos';
@@ -141,6 +150,9 @@ function diagramFor(item) {
     case 'feedforward':
       graphic = '<div class="feedforward-flow"><div class="control-card"><small>ENTRADA PREVISTA</small><b>Solicitudes previas</b></div><span class="control-arrow">→</span><div class="control-card is-active"><small>ANTICIPAR</small><b>Estimar demanda</b></div><span class="control-arrow">→</span><div class="control-card"><small>ACTUAR ANTES</small><b>Abrir otro grupo</b></div><span class="control-arrow">→</span><div class="control-card"><small>PROCESO</small><b>Inscripción</b></div><p class="diagram-note">Se adelanta al efecto previsto. Después, la retroalimentación comprueba el resultado.</p></div>';
       break;
+    case 'requirements':
+      graphic = flow([['Necesidades','cliente y usuarios'],['Análisis','aclarar y priorizar'],['Requisitos','documentar',true],['Validación','confirmar con interesados']]);
+      break;
     default:
       graphic = flow([['Entrada','recursos'],['Proceso','actividad',true],['Salida','resultado']]);
   }
@@ -179,6 +191,10 @@ function renderDayDetail() {
     '2026-10-02': {
       title: 'Bases para analizar un sistema',
       text: 'Se organizaron los fundamentos, niveles y clasificaciones de los sistemas y de los sistemas de información. También se relacionaron sus propiedades, el entorno y la regulación para orientar el análisis del proyecto final.'
+    },
+    '2026-10-05': {
+      title: 'Especificación de requisitos del sistema',
+      text: 'Se registró el proceso de identificar, analizar, documentar y validar necesidades, y se distinguieron los roles del cliente y el usuario final.'
     }
   };
   const summary = summaries[selectedClassDay] || {
@@ -192,6 +208,7 @@ function renderDayDetail() {
     '<h2>' + escapeHtml(summary.title) + '</h2><p>' + escapeHtml(summary.text) + '</p>' +
     '<div class="day-tags" aria-label="Temas incluidos">' + categoriesForDay.slice(0, 4).map((category) => '<span>' + escapeHtml(category) + '</span>').join('') + (categoriesForDay.length > 4 ? '<span>+' + (categoriesForDay.length - 4) + ' áreas</span>' : '') + '</div>' +
     '<p class="class-day-count">' + dayConcepts.length + ' conceptos en esta jornada</p>' +
+    (selectedClassDay === '2026-10-02' ? '<a class="exam-trigger class-day-resource" href="https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Ferickbravob.github.io%2Fsistemas-informacion-i%2Fmateriales%2Fteoria-general-sistemas-2026-10-02.pptx" target="_blank" rel="noopener noreferrer"><span><b>Presentación del docente</b><small>Teoría General de Sistemas · 2 de octubre</small></span><span aria-hidden="true">↗</span></a>' : '') +
     (exam ? '<button class="exam-trigger" type="button" data-highlight="' + escapeHtml(exam.slug) + '"><span><b>Repaso de examen</b><small>Pregunta de práctica · ' + escapeHtml(exam.title) + '</small></span><span aria-hidden="true">↗</span></button>' : '') +
     '</article>';
 }
@@ -208,8 +225,60 @@ function renderHome() {
   renderDayDetail();
   document.title = 'Calendario de clases · Sistemas de Información I';
 }
-function renderRoadmap() {
-  const steps = [
+const activity1StorageKey = 'sis1-activity-1-checklist-v1';
+const activity1Steps = [
+  {id:'team', title:'Completar el equipo y confirmar el tema', detail:'Llenar los nombres de integrantes en la diapositiva del grupo y confirmar cuál de las cuatro líneas temáticas le corresponde.', evidence:'Diapositiva del grupo completa y tema elegido o asignado.', related:['usuarios','alcance']},
+  {id:'sources', title:'Buscar y registrar fuentes físicas y digitales', detail:'La guía muestra espacios separados para los libros físicos y digitales. Anotar título, autor, edición y código de biblioteca; incluir al menos un libro físico encontrado en la biblioteca.', evidence:'Tabla de hallazgos con los datos bibliográficos del libro físico y las fuentes digitales consultadas.', related:['requisitos','usuarios']},
+  {id:'develop', title:'Desarrollar los puntos del tema seleccionado', detail:'Explicar los subtemas de la línea elegida con conceptos, ejemplos y diagramas basados en las fuentes consultadas.', evidence:'Contenido de la exposición relacionado con el tema asignado, con citas que permitan localizar las fuentes.', related:['requisitos','relaciones','atributos','arquitectura']},
+  {id:'image', title:'Incluir una imagen tomada del libro físico', detail:'Agregar al menos una imagen extraída del libro y señalar de qué libro y página se obtuvo. La guía indica presentarla a los compañeros.', evidence:'Imagen legible en las diapositivas, título del libro y número de página visibles.', related:['requisitos','relaciones']},
+  {id:'slides', title:'Completar las diapositivas y sus referencias', detail:'Usar la plantilla de la actividad para presentar el equipo, los hallazgos de biblioteca, el desarrollo del tema y las fuentes. Aplicar la guía APA 7 a citas, figuras y referencias, según las indicaciones del docente.', evidence:'Presentación revisada; datos de autoría y referencias completas, sin espacios de plantilla pendientes.', related:['usuarios','atributos','elementos']},
+  {id:'rehearse', title:'Ensayar la exposición de 10 minutos', detail:'Distribuir el tiempo y la participación del grupo. La duración indicada en la diapositiva del docente es de 10 minutos.', evidence:'Ensayo cronometrado y reparto de partes acordado.', related:['usuarios','relaciones']},
+  {id:'present', title:'Exponer y verificar la evidencia final', detail:'Presentar el tema a los compañeros y comprobar que la carpeta Actividad 1 conserva la versión final y las evidencias solicitadas.', evidence:'Exposición realizada y archivos finales guardados en Docs/Actividad 1.', related:['sistema','relaciones']}
+];
+const activity1Themes = [
+  ['UML y requisitos','Tipos de diagramas UML; funciones, calidad y restricciones del sistema.'],
+  ['Actores y casos de uso','Identificación de actores y diseño del diagrama de casos de uso.'],
+  ['Objetos y estados','Diagrama de objetos y diagrama de estados.'],
+  ['Datos y clases','Modelos conceptual, lógico y físico; diagrama de clases.']
+];
+function getActivity1Progress() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(activity1StorageKey) || '{}');
+    return saved && typeof saved === 'object' ? saved : {};
+  } catch (error) {
+    return {};
+  }
+}
+function updateActivity1Progress() {
+  const completed = page.querySelectorAll('[data-activity-check]:checked').length;
+  const total = activity1Steps.length;
+  const count = page.querySelector('#activity1-count');
+  const bar = page.querySelector('#activity1-progress-bar');
+  const track = page.querySelector('#activity1-progress-track');
+  if (count) { count.textContent = completed + ' de ' + total + ' pasos marcados'; }
+  if (bar) { bar.style.width = Math.round((completed / total) * 100) + '%'; }
+  if (track) { track.setAttribute('aria-valuenow', String(completed)); }
+}
+function renderActivity1() {
+  const progress = getActivity1Progress();
+  const completed = activity1Steps.filter((step) => progress[step.id] === true).length;
+  const topics = activity1Themes.map((theme, index) =>
+    '<li><span class="activity-topic-number">0' + (index + 1) + '</span><div><b>' + escapeHtml(theme[0]) + '</b><p>' + escapeHtml(theme[1]) + '</p></div></li>'
+  ).join('');
+  const tasks = activity1Steps.map((step) => {
+    const related = step.related.map((slug) => getConcept(slug)).filter(Boolean).map((concept) => topicLink(concept, 'activity-concept-link')).join('');
+    return '<li class="activity-task"><label class="activity-check"><input type="checkbox" data-activity-check="' + escapeHtml(step.id) + '" aria-label="Marcar como completado: ' + escapeHtml(step.title) + '"' + (progress[step.id] === true ? ' checked' : '') + '><span class="activity-checkmark" aria-hidden="true"></span></label><div class="activity-task-copy"><h3>' + escapeHtml(step.title) + '</h3><p>' + escapeHtml(step.detail) + '</p><p class="activity-evidence"><b>Comprueba con:</b> ' + escapeHtml(step.evidence) + '</p><div class="activity-connections"><span>SE RELACIONA CON</span>' + related + '</div></div></li>';
+  }).join('');
+  page.innerHTML =
+    '<article class="activity-page"><div class="breadcrumb"><a href="#inicio">Inicio</a><span>/</span><span>Actividades</span><span>/</span><span>Actividad 1</span></div>' +
+    '<header class="activity-header"><div><span class="eyebrow">GUÍA DEL DOCENTE · ACTIVIDAD 1</span><h1>Búsqueda de tesoros<br><em>en la biblioteca.</em></h1><p class="welcome-lead">Guía de avance basada en la presentación “Buscando tesoros en la biblioteca” y la guía APA 7 guardadas en Docs/Actividad 1.</p></div><section class="activity-meter" aria-label="Avance de la actividad"><span class="section-index">TU AVANCE</span><strong id="activity1-count">' + completed + ' de ' + activity1Steps.length + ' pasos marcados</strong><div class="activity-progress-track" id="activity1-progress-track" role="progressbar" aria-label="Pasos marcados como cumplidos" aria-valuemin="0" aria-valuemax="' + activity1Steps.length + '" aria-valuenow="' + completed + '"><i id="activity1-progress-bar" style="width:' + Math.round((completed / activity1Steps.length) * 100) + '%"></i></div><small>Se guarda en este navegador.</small></section></header>' +
+    '<section class="activity-topics"><div class="activity-section-heading"><span class="section-index">ELIGE EL TEMA ASIGNADO</span><p>La presentación propone estas cuatro líneas. Confirma cuál trabajará el grupo.</p></div><ol>' + topics + '</ol></section>' +
+    '<section class="activity-checklist"><div class="activity-section-heading"><span class="section-index">LISTA DE CUMPLIMIENTO</span><p>Marca cada paso cuando esté realizado y puedas mostrar su evidencia.</p></div><ol>' + tasks + '</ol></section>' +
+    '<aside class="activity-source-note"><b>Qué exige la presentación</b><p>Exposición de 10 minutos, consulta de libros físicos y digitales, referencia de al menos un libro físico de la biblioteca e inclusión de una imagen de ese libro con su título y página. La plantilla también pide los integrantes del grupo y el registro de hallazgos.</p><small>Los checks registran tu avance; no revisan automáticamente el contenido de tus archivos. No se encontró una fecha de entrega en los documentos revisados.</small></aside></article>';
+  document.title = 'Actividad 1 · Búsqueda en la biblioteca · Sistemas de Información I';
+}
+
+function renderRoadmap() {  const steps = [
     ['01','Definir el problema','Qué necesidad se atenderá, a quién afecta y qué resultado se espera.',['sistema','importancia','usuarios']],
     ['02','Delimitar el sistema','Precisar objetivo, límites, entorno, personas y subsistemas involucrados.',['elementos','subsistema','macrosistema']],
     ['03','Describir el proceso y la información','Identificar entradas, actividades, salidas, datos y retroalimentación.',['elementos','funcion','retroalimentacion']],
@@ -228,16 +297,35 @@ function renderRoadmap() {
 
 function renderArticle(item) {
   const related = (item.related || []).map((slug) => getConcept(slug)).filter(Boolean);
+  const roles = (item.roles || []).map((role) =>
+    '<article class="requirement-role"><h3>' + escapeHtml(role.title) + '</h3><p>' + escapeHtml(role.text) + '</p></article>'
+  ).join('');
+  const roleSection = roles
+    ? '<section class="requirements-roles"><div class="roles-heading"><span class="section-index">QUIÉN SOLICITA Y QUIÉN LO USA</span><h2>Cliente y usuario final</h2></div><div class="roles-grid">' + roles + '</div><p class="roles-note">' + escapeHtml(item.rolesNote || '') + '</p></section>'
+    : '';
+  const requirementTypes = (item.requirementTypes || []).map((type) =>
+    '<article class="requirement-role"><h3>' + escapeHtml(type.title) + '</h3><p>' + escapeHtml(type.description) + '</p><p><b>Incluyen:</b> ' + escapeHtml(type.categories) + '</p><p class="requirement-example"><b>Ejemplo:</b> ' + escapeHtml(type.example) + '</p></article>'
+  ).join('');
+  const requirementTypesSection = requirementTypes
+    ? '<section class="requirements-roles requirement-types"><div class="roles-heading"><span class="section-index">IDENTIFICACIÓN DE REQUISITOS</span><h2>Dos categorías principales</h2></div><div class="roles-grid">' + requirementTypes + '</div><p class="roles-note">Las listas son ejemplos de subcategorías; pueden variar según el método. Los requisitos de calidad necesitan criterios medibles y verificables.</p></section>'
+    : '';
+  const sources = (item.sources || []).map((source) =>    '<li><a href="' + escapeHtml(source.url) + '" target="_blank" rel="noopener noreferrer">' + escapeHtml(source.title) + '</a></li>'
+  ).join('');
+  const sourcesSection = sources
+    ? '<details class="source-details"><summary>Fuentes consultadas (' + item.sources.length + ')</summary><ul>' + sources + '</ul></details>'
+    : '';
   page.innerHTML =
     '<article class="article-page"><div class="breadcrumb"><a href="#inicio">Inicio</a><span>/</span><span>' + escapeHtml(item.category) + '</span><span>/</span><span>' + escapeHtml(item.title) + '</span></div>' +
     '<header class="article-head"><div class="article-meta"><span class="category-pill">' + escapeHtml(item.category) + '</span><span class="record-id">REGISTRO SIS1 · ' + escapeHtml(item.id) + '</span></div><h1>' + escapeHtml(item.title) + '</h1><p class="definition">' + escapeHtml(item.definition) + '</p></header>' +
     '<section class="example-panel"><span class="example-label">EJEMPLO</span><p>' + escapeHtml(item.example || 'Este concepto se relaciona con los elementos y objetivos del sistema que se esté analizando.') + '</p></section>' +
     diagramFor(item) +
+    requirementTypesSection +
+    roleSection +
     '<section class="related-section"><div class="related-heading"><span class="section-index">SIGUE EL HILO</span><h2>Temas relacionados</h2><p>Abre otro concepto para ver cómo se conecta.</p></div><div class="related-links">' + (related.length ? related.slice(0, 2).map((c) => topicLink(c,'related-link')).join('') : '<a href="#inicio" class="related-link">Volver al cuaderno</a>') + '</div></section>' +
+    sourcesSection +
     '<div class="article-status"><span class="status-dot"></span><span>Síntesis inicial · pendiente de contrastar con el material del docente</span></div></article>';
   document.title = item.title + ' · Sistemas de Información I';
 }
-
 function renderPage() {
   const slug = decodeURIComponent(location.hash.slice(1));
   const activeItem = getConcept(slug);
@@ -247,6 +335,8 @@ function renderPage() {
     renderArticle(activeItem);
   } else if (slug === 'ruta') {
     renderRoadmap();
+  } else if (slug === 'actividad-1') {
+    renderActivity1();
   } else {
     renderHome();
   }
@@ -328,8 +418,13 @@ document.addEventListener('click', (event) => {
     renderCalendar();
     renderDayDetail();
   }
-});window.addEventListener('hashchange', renderPage);
+});document.addEventListener('change', (event) => {
+  const checkbox = event.target.closest('[data-activity-check]');
+  if (!checkbox) { return; }
+  const progress = getActivity1Progress();
+  progress[checkbox.dataset.activityCheck] = checkbox.checked;
+  try { localStorage.setItem(activity1StorageKey, JSON.stringify(progress)); } catch (error) { }
+  updateActivity1Progress();
+});
+window.addEventListener('hashchange', renderPage);
 renderPage();
-
-
-

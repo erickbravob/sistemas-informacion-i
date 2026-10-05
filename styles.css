@@ -327,3 +327,69 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid #63bb
 @media(max-width:780px){.calendar-body{grid-template-columns:1fr}.calendar-left{border-right:0;border-bottom:1px solid #e5e9e2}.calendar-grid{gap:7px}.calendar-day,.calendar-blank{max-width:48px;margin:auto}}
 @media(max-width:560px){.calendar-panel{margin-top:24px}.calendar-top{align-items:flex-start;flex-direction:column;padding:14px}.calendar-controls{width:100%;justify-content:space-between}.calendar-controls h2{flex:1}.calendar-left{padding:17px 14px}.calendar-weekdays,.calendar-grid{gap:3px}.calendar-day,.calendar-blank{font-size:10px}.calendar-day.is-class-day i{bottom:3px;width:4px;height:4px}#calendar-day-detail{padding:20px 16px}.class-day-summary h2{font-size:24px}}
 .calendar-empty-state{display:flex;min-height:230px;flex-direction:column;justify-content:center;gap:10px}.calendar-empty-state .section-index{color:var(--muted)}.calendar-empty-state p{max-width:260px;margin:0;color:#75847b;font-size:11px;line-height:1.7}
+/* Requisitos y roles de participación */
+.requirements-roles{max-width:780px;margin:27px 0 0;padding-top:18px;border-top:1px solid var(--line)}
+.roles-heading h2{margin:6px 0 13px;font:500 23px var(--serif)}
+.roles-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.requirement-role{padding:14px 15px;background:var(--white);border:1px solid #e0e6df}
+.requirement-role h3{margin:0;color:#3f7466;font:500 17px var(--serif)}
+.requirement-role p{margin:6px 0 0;color:#65756e;font-size:10px;line-height:1.7}
+.roles-note{margin:9px 0 0;color:#819087;font-size:9px}
+.source-details{max-width:780px;margin:17px 0 0;padding-top:11px;border-top:1px solid var(--line);color:#6c7c73;font-size:10px}
+.source-details summary{width:max-content;cursor:pointer;color:#47796d;font:9px var(--mono)}
+.source-details ul{margin:9px 0 0;padding-left:18px}
+.source-details li{margin:5px 0}
+.source-details a{color:#36796c;text-underline-offset:2px}
+@media(max-width:560px){.roles-grid{grid-template-columns:1fr}.requirement-role{padding:12px}.roles-heading h2{font-size:21px}}
+.class-day-resource{text-decoration:none}
+
+
+/* Guía de avance de la actividad 1 */
+.project-link.activity-link{margin-top:8px;background:#edf2eb;color:var(--ink);border:1px solid #d8e1d7}
+.project-link.activity-link:hover{background:#e0eae0}
+.project-link.activity-link .project-icon{color:#4b8172}
+.project-link.activity-link small{color:#6f8176}
+.activity-page{max-width:900px}
+.activity-header{display:grid;grid-template-columns:minmax(0,1fr) 220px;align-items:end;gap:30px;margin-bottom:31px}
+.activity-header h1{margin:18px 0 14px;font:500 clamp(40px,4.7vw,58px)/1.02 var(--serif);letter-spacing:-.035em}
+.activity-header h1 em{font-style:normal;color:var(--teal)}
+.activity-meter{padding:15px;background:#eef2eb;border-top:2px solid var(--teal)}
+.activity-meter strong{display:block;margin:9px 0 10px;color:var(--ink);font:500 16px var(--serif)}
+.activity-meter small{display:block;margin-top:8px;color:#748379;font-size:9px}
+.activity-progress-track{height:5px;background:#d7e1d6;overflow:hidden}
+.activity-progress-track i{display:block;height:100%;background:var(--teal);transition:width .18s ease}
+.activity-topics,.activity-checklist{max-width:850px;margin-top:29px}
+.activity-section-heading{margin-bottom:13px}
+.activity-section-heading .section-index{color:var(--teal)}
+.activity-section-heading p{margin:6px 0 0;color:#697970;font-size:11px;line-height:1.65}
+.activity-topics ol,.activity-checklist ol{margin:0;padding:0;list-style:none}
+.activity-topics ol{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-top:1px solid var(--line)}
+.activity-topics li{display:grid;grid-template-columns:30px 1fr;gap:9px;padding:13px 14px 13px 0;border-bottom:1px solid var(--line)}
+.activity-topic-number{color:#b08a45;font:10px var(--mono)}
+.activity-topics li b{color:var(--ink);font:500 15px var(--serif)}
+.activity-topics li p{margin:4px 0 0;color:#6e7d74;font-size:10px;line-height:1.6}
+.activity-checklist ol{border-top:1px solid var(--line)}
+.activity-task{display:grid;grid-template-columns:30px minmax(0,1fr);gap:11px;padding:17px 2px 17px 0;border-bottom:1px solid var(--line)}
+.activity-check{position:relative;display:block;width:23px;height:23px;cursor:pointer}
+.activity-check input{position:absolute;width:23px;height:23px;margin:0;opacity:0;cursor:pointer}
+.activity-checkmark{display:grid;width:21px;height:21px;place-items:center;border:1px solid #aab9ae;background:#fff;color:#fff}
+.activity-check input:checked+.activity-checkmark{border-color:#367b6c;background:#367b6c}
+.activity-check input:checked+.activity-checkmark:after{content:'✓';font-size:13px}
+.activity-check input:focus-visible+.activity-checkmark{outline:2px solid #b28d49;outline-offset:3px}
+.activity-task-copy h3{margin:0;color:var(--ink);font:500 18px/1.25 var(--serif)}
+.activity-task-copy>p{max-width:710px;margin:6px 0 0;color:#66766e;font-size:11px;line-height:1.7}
+.activity-task-copy .activity-evidence{color:#475d54}
+.activity-evidence b{font-weight:700;color:#4b7566}
+.activity-connections{display:flex;flex-wrap:wrap;align-items:center;gap:7px;margin-top:9px}
+.activity-connections>span{color:#8d988f;font:8px var(--mono);letter-spacing:.04em}
+.activity-concept-link{color:#39796c;font-size:9px;text-decoration:underline;text-decoration-color:#bfd0c3;text-underline-offset:3px}
+.activity-concept-link:hover{color:#1c4f48}
+.activity-source-note{max-width:850px;margin:27px 0 0;padding:16px 18px;background:#f7f2e6;border-left:3px solid #b18c4b}
+.activity-source-note b{color:#665537;font:500 17px var(--serif)}
+.activity-source-note p{margin:7px 0 0;color:#665f50;font-size:11px;line-height:1.75}
+.activity-source-note small{display:block;margin-top:11px;color:#867a61;font-size:9px;line-height:1.65}
+@media(max-width:700px){.activity-header{grid-template-columns:1fr;gap:18px}.activity-meter{max-width:360px}.activity-topics ol{grid-template-columns:1fr}}
+@media(max-width:560px){.activity-header h1{font-size:40px}.activity-task{grid-template-columns:25px minmax(0,1fr);gap:8px;padding:14px 0}.activity-task-copy h3{font-size:16px}.activity-task-copy>p{font-size:10px}.activity-source-note{padding:13px 14px}}
+
+.requirement-example{padding-top:5px;border-top:1px solid #e7ebe4}
+.requirement-example b{color:#4b7566}
