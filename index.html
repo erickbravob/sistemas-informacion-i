@@ -9,14 +9,14 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=2026-10-02-011">
+  <link rel="stylesheet" href="styles.css?v=2026-10-05-001">
 </head>
 <body>
   <header class="masthead">
     <div class="topline">
       <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="sidebar" aria-label="Abrir temario"><span></span><span></span></button>
       <a class="brand" href="#inicio" aria-label="Inicio del cuaderno"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span>Sistemas de Información <b>I</b></span></a>
-      <nav class="topnav" aria-label="Secciones"><a href="#inicio">Inicio</a><a href="#ruta">Proyecto final</a></nav>
+
       <span class="edition"><i></i> CUADERNO DE CLASE</span>
     </div>
     <div class="search-row">
@@ -36,9 +36,9 @@
       <div class="sidebar-intro">
         <span class="sidebar-kicker">SISTEMAS DE INFORMACIÓN I</span>
         <p>Temario de consulta</p>
-        <span class="sidebar-subtitle">02 oct 2026 <i></i> 26 conceptos</span>
+        <span class="sidebar-subtitle">02 oct 2026 <i></i> 27 conceptos</span>
       </div>
-      
+
       <nav class="topic-nav" id="topic-nav" aria-label="Temas por categoría"></nav>
       <a class="project-link" href="#ruta"><span class="project-icon" aria-hidden="true">↗</span><span><b>Proyecto final</b><small>Ruta de trabajo sugerida</small></span></a>
       <div class="sidebar-help"><span class="help-mark">?</span><p>Busca en cualquier momento con <kbd>/</kbd>. Escribe una palabra o parte del tema.</p></div>
@@ -50,8 +50,18 @@
     </main>
   </div>
 
-  <script src="conceptos.js?v=2026-10-02-011"></script>
-  <script src="app.js?v=2026-10-02-011"></script>
+  <dialog class="highlight-dialog" id="highlight-dialog" aria-labelledby="highlight-title">
+    <div class="highlight-modal">
+      <button class="dialog-close" type="button" data-close-highlight aria-label="Cerrar">×</button>
+      <span class="eyebrow">REPASO · PREGUNTA DE PRÁCTICA</span>
+      <h2 id="highlight-title">Sinergia</h2>
+      <p class="highlight-question" id="highlight-question"></p>
+      <div class="highlight-answer"><span>RESPUESTA GUÍA</span><p id="highlight-answer"></p></div>
+      <button class="dialog-done" type="button" data-close-highlight>Entendido</button>
+    </div>
+  </dialog>
+  <script src="conceptos.js?v=2026-10-05-001"></script>
+  <script src="app.js?v=2026-10-05-001"></script>
 </body>
 </html>
 

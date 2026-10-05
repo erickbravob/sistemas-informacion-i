@@ -132,7 +132,10 @@ function diagramFor(item) {
       graphic = '<div class="regulation-loop"><div class="reg-step"><small>01 · OBJETIVO</small><b>Cupo máximo</b></div><span>→</span><div class="reg-step"><small>02 · OBSERVAR</small><b>Inscripciones actuales</b></div><span>→</span><div class="reg-step is-active"><small>03 · COMPARAR</small><b>¿Hay cupo?</b></div><span>→</span><div class="reg-step"><small>04 · AJUSTAR</small><b>Avisar o bloquear</b></div><span class="reg-return">↶ retroalimentación</span></div>';
       break;
     case 'feedback':
-      graphic = '<div class="feedback-graphic"><div class="loop-node">Sistema</div><span>resultado</span><div class="loop-node loop-result">Información</div><span>ajuste</span><div class="loop-node">Sistema</div></div><p class="diagram-note">El resultado vuelve como información para orientar una corrección.</p>';
+      graphic = '<div class="control-loop"><div class="control-card"><small>OBJETIVO</small><b>30 cupos</b></div><span class="control-arrow">→</span><div class="control-card"><small>PROCESO</small><b>Inscripciones</b></div><span class="control-arrow">→</span><div class="control-card"><small>SALIDA MEDIDA</small><b>30 inscritos</b></div><span class="control-arrow">→</span><div class="control-card is-active"><small>COMPARAR Y AJUSTAR</small><b>Cerrar registro</b></div><span class="control-return">↶ El resultado vuelve como información para corregir</span></div>';
+      break;
+    case 'feedforward':
+      graphic = '<div class="feedforward-flow"><div class="control-card"><small>ENTRADA PREVISTA</small><b>Solicitudes previas</b></div><span class="control-arrow">→</span><div class="control-card is-active"><small>ANTICIPAR</small><b>Estimar demanda</b></div><span class="control-arrow">→</span><div class="control-card"><small>ACTUAR ANTES</small><b>Abrir otro grupo</b></div><span class="control-arrow">→</span><div class="control-card"><small>PROCESO</small><b>Inscripción</b></div><p class="diagram-note">Se adelanta al efecto previsto. Después, la retroalimentación comprueba el resultado.</p></div>';
       break;
     default:
       graphic = flow([['Entrada','recursos'],['Proceso','actividad',true],['Salida','resultado']]);
@@ -141,18 +144,38 @@ function diagramFor(item) {
 }
 
 function renderHome() {
+  const summaries = {
+    '2026-10-02': {
+      title: 'Bases para analizar un sistema',
+      text: 'Se organizaron los fundamentos, niveles y clasificaciones de los sistemas y de los sistemas de información. También se relacionaron sus propiedades, el entorno y la regulación para orientar el análisis del proyecto final.'
+    }
+  };
+  const days = [...new Set(concepts.map((item) => item.day))].sort().reverse();
+  const monthNames = ['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC'];
+  const dayCards = days.map((day, index) => {
+    const dayConcepts = concepts.filter((item) => item.day === day);
+    const dayCategories = [...new Set(dayConcepts.map((item) => item.category))];
+    const summary = summaries[day] || {
+      title: 'Apuntes de la jornada',
+      text: 'Se registraron ' + dayConcepts.length + ' conceptos en ' + dayCategories.join(', ') + '. La síntesis se completará con los puntos principales de la clase.'
+    };
+    const [year, month, date] = day.split('-');
+    const exam = dayConcepts.find((item) => item.examQuestion);
+    return '<details class="day-card"' + (index === 0 ? ' open' : '') + '>' +
+      '<summary class="day-date"><span>JORNADA</span><strong>' + escapeHtml(date) + '</strong><span class="day-date-info">' + monthNames[Number(month) - 1] + ' ' + escapeHtml(year) + '<b>' + escapeHtml(summary.title) + '</b><small>' + dayConcepts.length + ' conceptos · Ver resumen</small></span><span class="date-chevron" aria-hidden="true">⌄</span></summary>' +
+      '<div class="day-summary-body"><span class="section-index">RESUMEN DEL DÍA</span><h2>' + escapeHtml(summary.title) + '</h2><p>' + escapeHtml(summary.text) + '</p>' +
+      '<div class="day-tags" aria-label="Temas incluidos">' + dayCategories.slice(0, 4).map((category) => '<span>' + escapeHtml(category) + '</span>').join('') + (dayCategories.length > 4 ? '<span>+' + (dayCategories.length - 4) + ' áreas</span>' : '') + '</div>' +
+      (exam ? '<button class="exam-trigger" type="button" data-highlight="' + escapeHtml(exam.slug) + '"><span><b>Repaso de examen</b><small>Pregunta de práctica · ' + escapeHtml(exam.title) + '</small></span><span aria-hidden="true">↗</span></button>' : '') +
+      '</div></details>';
+  }).join('');
   page.innerHTML =
-    '<section class="welcome-page">' +
-      '<span class="eyebrow">CUADERNO DE CLASE · 02 OCT 2026</span>' +
-      '<h1>Un tema por vez.<br><em>Un sistema bien pensado.</em></h1>' +
-      '<p class="welcome-lead">Consulta conceptos conectados y recorre una guía inicial para ordenar el proyecto final. Usa el buscador o el temario lateral para entrar a un tema.</p>' +
-      '<div class="home-map"><div class="home-map-label">PUNTO DE PARTIDA</div><div class="home-map-flow"><a href="#sistema"><small>01</small><b>Comprender</b><span>Sistema y elementos</span></a><i>→</i><a href="#funcion"><small>02</small><b>Relacionar</b><span>Información y usuarios</span></a><i>→</i><a href="#ruta"><small>03</small><b>Desarrollar</b><span>Proyecto final</span></a></div></div>' +
-      '<div class="home-shortcuts"><a href="#sistema"><span>FUNDAMENTOS</span><b>¿Qué hace que algo sea un sistema?</b><i>↗</i></a><a href="#arquitectura"><span>DISEÑO</span><b>¿Cómo se organizan sus componentes?</b><i>↗</i></a><a href="#ruta"><span>PROYECTO FINAL</span><b>¿Qué conviene resolver primero?</b><i>↗</i></a></div>' +
-      '<p class="review-note"><i></i> Las síntesis de esta jornada siguen pendientes de contraste con el material de clase.</p>' +
-    '</section>';
-  document.title = 'Inicio · Sistemas de Información I';
+    '<section class="welcome-page"><div class="daily-kicker"><span class="eyebrow">CUADERNO DE CLASE</span><span class="day-total">' + concepts.length + ' conceptos · ' + days.length + ' jornadas</span></div>' +
+    '<h1>Avance por<br><em>jornada.</em></h1>' +
+    '<p class="welcome-lead">Cada jornada reúne lo trabajado y deja una síntesis breve. Busca un concepto desde cualquier sección con el buscador o el temario lateral.</p>' +
+    '<div class="day-list" aria-label="Resúmenes por jornada">' + dayCards + '</div>' +
+    '<p class="review-note"><i></i> Las síntesis son iniciales; queda pendiente cotejarlas con el material del docente.</p></section>';
+  document.title = 'Resumen por jornada · Sistemas de Información I';
 }
-
 function renderRoadmap() {
   const steps = [
     ['01','Definir el problema','Qué necesidad se atenderá, a quién afecta y qué resultado se espera.',['sistema','importancia','usuarios']],
@@ -166,7 +189,7 @@ function renderRoadmap() {
     '<article class="roadmap-page"><div class="breadcrumb"><a href="#inicio">Inicio</a><span>/</span><span>Proyecto final</span></div>' +
     '<header class="article-head"><span class="eyebrow">GUÍA DE TRABAJO · BORRADOR</span><h1>Construir el sistema<br><em>en un orden claro.</em></h1><p class="welcome-lead">Una ruta de referencia para pasar de una necesidad a una solución de sistemas de información. La ajustaremos cuando tengamos las instrucciones y el tema del proyecto.</p></header>' +
     '<div class="roadmap-list">' + steps.map((step) =>
-      '<section class="roadmap-step"><div class="step-number">' + step[0] + '</div><div class="step-body"><h2>' + escapeHtml(step[1]) + '</h2><p>' + escapeHtml(step[2]) + '</p><div class="step-links">' + step[3].map((slug) => { const c = getConcept(slug); return c ? topicLink(c,'wiki-link') : ''; }).join('') + '</div></div><span class="step-connector" aria-hidden="true">↓</span></section>'
+      '<section class="roadmap-step"><div class="step-number">' + step[0] + '</div><div class="step-body"><h2>' + escapeHtml(step[1]) + '</h2><p>' + escapeHtml(step[2]) + '</p><div class="step-links">' + step[3].slice(0, 1).map((slug) => { const c = getConcept(slug); return c ? topicLink(c,'wiki-link') : ''; }).join('') + '</div></div><span class="step-connector" aria-hidden="true">↓</span></section>'
     ).join('') + '</div><p class="review-note"><i></i> Esta guía no sustituye la consigna del docente. Se completará con el tema, alcance y entregables definidos para el proyecto final.</p></article>';
   document.title = 'Ruta del proyecto final · Sistemas de Información I';
 }
@@ -178,7 +201,7 @@ function renderArticle(item) {
     '<header class="article-head"><div class="article-meta"><span class="category-pill">' + escapeHtml(item.category) + '</span><span class="record-id">REGISTRO SIS1 · ' + escapeHtml(item.id) + '</span></div><h1>' + escapeHtml(item.title) + '</h1><p class="definition">' + escapeHtml(item.definition) + '</p></header>' +
     '<section class="example-panel"><span class="example-label">EJEMPLO</span><p>' + escapeHtml(item.example || 'Este concepto se relaciona con los elementos y objetivos del sistema que se esté analizando.') + '</p></section>' +
     diagramFor(item) +
-    '<section class="related-section"><div class="related-heading"><span class="section-index">SIGUE EL HILO</span><h2>Temas relacionados</h2><p>Abre otro concepto para ver cómo se conecta.</p></div><div class="related-links">' + (related.length ? related.map((c) => topicLink(c,'related-link')).join('') : '<a href="#inicio" class="related-link">Volver al cuaderno</a>') + '</div></section>' +
+    '<section class="related-section"><div class="related-heading"><span class="section-index">SIGUE EL HILO</span><h2>Temas relacionados</h2><p>Abre otro concepto para ver cómo se conecta.</p></div><div class="related-links">' + (related.length ? related.slice(0, 2).map((c) => topicLink(c,'related-link')).join('') : '<a href="#inicio" class="related-link">Volver al cuaderno</a>') + '</div></section>' +
     '<div class="article-status"><span class="status-dot"></span><span>Síntesis inicial · pendiente de contrastar con el material del docente</span></div></article>';
   document.title = item.title + ' · Sistemas de Información I';
 }
@@ -244,6 +267,19 @@ document.addEventListener('click', (event) => {
     searchResults.hidden = false;
   }
 });
+const highlightDialog = document.querySelector('#highlight-dialog');
+const closeHighlightButtons = document.querySelectorAll('[data-close-highlight]');
+document.addEventListener('click', (event) => {
+  const trigger = event.target.closest('[data-highlight]');
+  if (!trigger || !highlightDialog) return;
+  const item = getConcept(trigger.dataset.highlight);
+  if (!item || !item.examQuestion) return;
+  document.querySelector('#highlight-title').textContent = 'Sinergia';
+  document.querySelector('#highlight-question').textContent = item.examQuestion;
+  document.querySelector('#highlight-answer').textContent = item.examAnswer;
+  highlightDialog.showModal();
+});
+closeHighlightButtons.forEach((button) => button.addEventListener('click', () => highlightDialog.close()));
 window.addEventListener('hashchange', renderPage);
 renderPage();
 
