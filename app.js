@@ -7,6 +7,10 @@ const topicNav = document.querySelector('#topic-nav');
 const sidebar = document.querySelector('#sidebar');
 const menuToggle = document.querySelector('#menu-toggle');
 let activeCategory = '';
+const monthNames = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+const classDays = [...new Set(concepts.map((item) => item.day).filter(Boolean))].sort();
+let selectedClassDay = classDays[classDays.length - 1] || '';
+let calendarMonth = selectedClassDay ? new Date(selectedClassDay + 'T12:00:00') : new Date();
 
 function escapeHtml(value) {
   return String(value).replace(/[&<>"']/g, (char) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
@@ -143,38 +147,63 @@ function diagramFor(item) {
   return '<figure class="explain-figure"><div class="figure-top"><span>ESQUEMA VISUAL</span><span>' + escapeHtml(item.category.toUpperCase()) + '</span></div><div class="diagram">' + graphic + '</div><figcaption>Lectura rápida · ejemplo de apoyo al concepto</figcaption></figure>';
 }
 
-function renderHome() {
+function renderCalendar() {
+  const year = calendarMonth.getFullYear();
+  const month = calendarMonth.getMonth();
+  const offset = (new Date(year, month, 1).getDay() + 6) % 7;
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const grid = document.querySelector('#calendar-grid');
+  const monthLabel = document.querySelector('#calendar-month');
+  monthLabel.textContent = monthNames[month].toLocaleUpperCase('es') + ' ' + year;
+  const cells = Array.from({length: offset}, () => '<span class="calendar-blank" aria-hidden="true"></span>');
+  for (let date = 1; date <= daysInMonth; date += 1) {
+    const day = year + '-' + String(month + 1).padStart(2, '0') + '-' + String(date).padStart(2, '0');
+    if (classDays.includes(day)) {
+      const count = concepts.filter((item) => item.day === day).length;
+      cells.push('<button class="calendar-day is-class-day' + (day === selectedClassDay ? ' is-selected' : '') + '" type="button" data-class-day="' + day + '" aria-pressed="' + (day === selectedClassDay) + '" aria-label="' + date + ' de ' + monthNames[month] + ' de ' + year + ', día de clase, ' + count + ' conceptos"><span>' + date + '</span><i aria-hidden="true"></i></button>');
+    } else {
+      cells.push('<span class="calendar-day" aria-hidden="true">' + date + '</span>');
+    }
+  }
+  grid.innerHTML = cells.join('');
+}
+
+function renderDayDetail() {
+  const detail = document.querySelector('#calendar-day-detail');
+  const dayConcepts = concepts.filter((item) => item.day === selectedClassDay);
+  const categoriesForDay = [...new Set(dayConcepts.map((item) => item.category))];
   const summaries = {
     '2026-10-02': {
       title: 'Bases para analizar un sistema',
       text: 'Se organizaron los fundamentos, niveles y clasificaciones de los sistemas y de los sistemas de información. También se relacionaron sus propiedades, el entorno y la regulación para orientar el análisis del proyecto final.'
     }
   };
-  const days = [...new Set(concepts.map((item) => item.day))].sort().reverse();
-  const monthNames = ['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC'];
-  const dayCards = days.map((day, index) => {
-    const dayConcepts = concepts.filter((item) => item.day === day);
-    const dayCategories = [...new Set(dayConcepts.map((item) => item.category))];
-    const summary = summaries[day] || {
-      title: 'Apuntes de la jornada',
-      text: 'Se registraron ' + dayConcepts.length + ' conceptos en ' + dayCategories.join(', ') + '. La síntesis se completará con los puntos principales de la clase.'
-    };
-    const [year, month, date] = day.split('-');
-    const exam = dayConcepts.find((item) => item.examQuestion);
-    return '<details class="day-card"' + (index === 0 ? ' open' : '') + '>' +
-      '<summary class="day-date"><span>JORNADA</span><strong>' + escapeHtml(date) + '</strong><span class="day-date-info">' + monthNames[Number(month) - 1] + ' ' + escapeHtml(year) + '<b>' + escapeHtml(summary.title) + '</b><small>' + dayConcepts.length + ' conceptos · Ver resumen</small></span><span class="date-chevron" aria-hidden="true">⌄</span></summary>' +
-      '<div class="day-summary-body"><span class="section-index">RESUMEN DEL DÍA</span><h2>' + escapeHtml(summary.title) + '</h2><p>' + escapeHtml(summary.text) + '</p>' +
-      '<div class="day-tags" aria-label="Temas incluidos">' + dayCategories.slice(0, 4).map((category) => '<span>' + escapeHtml(category) + '</span>').join('') + (dayCategories.length > 4 ? '<span>+' + (dayCategories.length - 4) + ' áreas</span>' : '') + '</div>' +
-      (exam ? '<button class="exam-trigger" type="button" data-highlight="' + escapeHtml(exam.slug) + '"><span><b>Repaso de examen</b><small>Pregunta de práctica · ' + escapeHtml(exam.title) + '</small></span><span aria-hidden="true">↗</span></button>' : '') +
-      '</div></details>';
-  }).join('');
+  const summary = summaries[selectedClassDay] || {
+    title: 'Apuntes de la jornada',
+    text: 'Se registraron ' + dayConcepts.length + ' conceptos en ' + categoriesForDay.join(', ') + '. La síntesis se completará con los puntos principales de la clase.'
+  };
+  const [year, month, date] = selectedClassDay.split('-');
+  const exam = dayConcepts.find((item) => item.examQuestion);
+  detail.innerHTML =
+    '<article class="class-day-summary"><span class="section-index">RESUMEN DEL DÍA</span><div class="class-day-date">' + Number(date) + ' ' + monthNames[Number(month) - 1] + ' ' + year + '</div>' +
+    '<h2>' + escapeHtml(summary.title) + '</h2><p>' + escapeHtml(summary.text) + '</p>' +
+    '<div class="day-tags" aria-label="Temas incluidos">' + categoriesForDay.slice(0, 4).map((category) => '<span>' + escapeHtml(category) + '</span>').join('') + (categoriesForDay.length > 4 ? '<span>+' + (categoriesForDay.length - 4) + ' áreas</span>' : '') + '</div>' +
+    '<p class="class-day-count">' + dayConcepts.length + ' conceptos en esta jornada</p>' +
+    (exam ? '<button class="exam-trigger" type="button" data-highlight="' + escapeHtml(exam.slug) + '"><span><b>Repaso de examen</b><small>Pregunta de práctica · ' + escapeHtml(exam.title) + '</small></span><span aria-hidden="true">↗</span></button>' : '') +
+    '</article>';
+}
+
+function renderHome() {
   page.innerHTML =
-    '<section class="welcome-page"><div class="daily-kicker"><span class="eyebrow">CUADERNO DE CLASE</span><span class="day-total">' + concepts.length + ' conceptos · ' + days.length + ' jornadas</span></div>' +
-    '<h1>Avance por<br><em>jornada.</em></h1>' +
-    '<p class="welcome-lead">Cada jornada reúne lo trabajado y deja una síntesis breve. Busca un concepto desde cualquier sección con el buscador o el temario lateral.</p>' +
-    '<div class="day-list" aria-label="Resúmenes por jornada">' + dayCards + '</div>' +
-    '<p class="review-note"><i></i> Las síntesis son iniciales; queda pendiente cotejarlas con el material del docente.</p></section>';
-  document.title = 'Resumen por jornada · Sistemas de Información I';
+    '<section class="welcome-page"><div class="daily-kicker"><span class="eyebrow">SISTEMAS DE INFORMACIÓN I</span><span class="day-total">' + classDays.length + ' jornadas con clase</span></div>' +
+    '<h1>Calendario de<br><em>clases.</em></h1>' +
+    '<p class="welcome-lead">Los días con apuntes registrados aparecen resaltados. Selecciona uno para consultar el resumen y los conceptos trabajados.</p>' +
+    '<section class="calendar-panel" aria-label="Calendario de jornadas de clase"><div class="calendar-top"><span class="section-index">AVANCE DE LA MATERIA</span><div class="calendar-controls"><button type="button" data-calendar-step="-1" aria-label="Mes anterior">‹</button><h2 id="calendar-month"></h2><button type="button" data-calendar-step="1" aria-label="Mes siguiente">›</button></div></div>' +
+    '<div class="calendar-body"><div class="calendar-left"><div class="calendar-weekdays" aria-hidden="true"><span>L</span><span>M</span><span>M</span><span>J</span><span>V</span><span>S</span><span>D</span></div><div class="calendar-grid" id="calendar-grid"></div><div class="calendar-legend"><i></i><span>Día con apuntes de clase</span></div></div><div id="calendar-day-detail" aria-live="polite"></div></div></section>' +
+    '<p class="review-note"><i></i> El calendario resalta solo fechas con conceptos registrados; no agrega fechas de clase supuestas.</p></section>';
+  renderCalendar();
+  renderDayDetail();
+  document.title = 'Calendario de clases · Sistemas de Información I';
 }
 function renderRoadmap() {
   const steps = [
@@ -280,7 +309,20 @@ document.addEventListener('click', (event) => {
   highlightDialog.showModal();
 });
 closeHighlightButtons.forEach((button) => button.addEventListener('click', () => highlightDialog.close()));
-window.addEventListener('hashchange', renderPage);
+document.addEventListener('click', (event) => {
+  const monthButton = event.target.closest('[data-calendar-step]');
+  if (monthButton) {
+    calendarMonth.setMonth(calendarMonth.getMonth() + Number(monthButton.dataset.calendarStep));
+    renderCalendar();
+    return;
+  }
+  const dayButton = event.target.closest('[data-class-day]');
+  if (dayButton) {
+    selectedClassDay = dayButton.dataset.classDay;
+    renderCalendar();
+    renderDayDetail();
+  }
+});window.addEventListener('hashchange', renderPage);
 renderPage();
 
 

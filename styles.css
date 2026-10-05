@@ -296,3 +296,33 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid #63bb
 .day-card:not([open]):hover .day-date{background:#1b3449}
 @media(max-width:780px){.day-card[open]{grid-template-columns:104px minmax(0,1fr)}}
 @media(max-width:560px){.day-list{margin-top:25px}.day-card[open]{grid-template-columns:1fr}.day-card:not([open]) .day-date{min-height:78px;grid-template-columns:34px 43px minmax(0,1fr) 15px;gap:9px;padding:10px 14px}.day-card:not([open]) .day-date strong{font-size:37px}.day-card:not([open]) .day-date-info{gap:3px;font-size:8px}.day-card:not([open]) .day-date-info b{font-size:13px}.day-card[open] .day-date{min-height:59px;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:11px;padding:10px 14px}.day-card[open] .day-date strong{font-size:39px}.day-card[open] .date-chevron{position:static;transform:none}.day-card[open] .day-date-info{display:none}}
+/* Calendario de clases */
+.calendar-panel{max-width:930px;margin-top:31px;background:var(--white);border:1px solid #dce3da;box-shadow:0 12px 28px rgba(26,48,55,.055)}
+.calendar-top{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:17px 22px;border-bottom:1px solid #e5e9e2}
+.calendar-top .section-index{color:var(--teal)}
+.calendar-controls{display:flex;align-items:center;gap:13px}
+.calendar-controls h2{min-width:150px;margin:0;text-align:center;color:var(--ink);font:500 20px var(--serif);text-transform:capitalize}
+.calendar-controls button{width:31px;height:31px;border:1px solid #dce3da;background:#f5f7f2;color:#527469;font-size:20px;line-height:1;cursor:pointer}
+.calendar-controls button:hover{background:#e7f0e9;border-color:#a9cbb5}
+.calendar-body{display:grid;grid-template-columns:minmax(280px,.94fr) minmax(0,1.06fr);min-height:345px}
+.calendar-left{padding:21px 24px;border-right:1px solid #e5e9e2}
+.calendar-weekdays,.calendar-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px}
+.calendar-weekdays{margin-bottom:7px}
+.calendar-weekdays span{display:grid;place-items:center;height:27px;color:#87958d;font:9px var(--mono)}
+.calendar-day,.calendar-blank{position:relative;display:grid;place-items:center;min-width:0;aspect-ratio:1;background:transparent;border:1px solid transparent;color:#728078;font-size:11px}
+.calendar-day.is-class-day{background:#edf4ed;border-color:#b8d5c1;color:#2f685d;font-weight:700;cursor:pointer}
+.calendar-day.is-class-day:hover{background:#dcece1;border-color:#82b79c}
+.calendar-day.is-class-day i{position:absolute;bottom:5px;width:5px;height:5px;border-radius:50%;background:var(--gold)}
+.calendar-day.is-class-day.is-selected{background:var(--ink);border-color:var(--ink);color:#fff}
+.calendar-day.is-class-day.is-selected i{background:var(--mint)}
+.calendar-legend{display:flex;align-items:center;gap:8px;margin-top:15px;color:#7c8b82;font-size:9px}
+.calendar-legend i{width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 3px #fbf3df}
+#calendar-day-detail{padding:24px 25px}
+.class-day-summary>.section-index{color:var(--teal)}
+.class-day-date{margin-top:8px;color:#829087;font:9px var(--mono);letter-spacing:.05em;text-transform:uppercase}
+.class-day-summary h2{margin:8px 0 10px;font:500 clamp(22px,2.5vw,29px)/1.15 var(--serif)}
+.class-day-summary>p:not(.class-day-count){margin:0;color:#61716b;font-size:11px;line-height:1.8}
+.class-day-count{margin:14px 0 0;color:#829087;font:9px var(--mono)}
+.calendar-day.is-selected{outline:2px solid #88bba0;outline-offset:2px}
+@media(max-width:780px){.calendar-body{grid-template-columns:1fr}.calendar-left{border-right:0;border-bottom:1px solid #e5e9e2}.calendar-grid{gap:7px}.calendar-day,.calendar-blank{max-width:48px;margin:auto}}
+@media(max-width:560px){.calendar-panel{margin-top:24px}.calendar-top{align-items:flex-start;flex-direction:column;padding:14px}.calendar-controls{width:100%;justify-content:space-between}.calendar-controls h2{flex:1}.calendar-left{padding:17px 14px}.calendar-weekdays,.calendar-grid{gap:3px}.calendar-day,.calendar-blank{font-size:10px}.calendar-day.is-class-day i{bottom:3px;width:4px;height:4px}#calendar-day-detail{padding:20px 16px}.class-day-summary h2{font-size:24px}}
