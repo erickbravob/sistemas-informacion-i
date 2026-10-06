@@ -1,0 +1,35 @@
+@startuml
+title Modelo logico analitico - Biblioteca UPEA
+class Usuario {
+ id_usuario : entero
+ nombre : texto
+}
+class Bibliotecario {
+ id_bibliotecario : entero
+ nombre_usuario : texto
+}
+class Ejemplar {
+ id_ejemplar : entero
+ codigo : texto
+ estado : enumeracion
+}
+class Prestamo {
+ id_prestamo : entero
+ fecha_prestamo : fecha
+ fecha_devolucion : fecha
+}
+class Reserva {
+ id_reserva : entero
+ fecha_solicitud : fecha
+ estado : enumeracion
+}
+Usuario "1" -- "0..*" Prestamo
+Ejemplar "1" -- "0..*" Prestamo
+Usuario "1" -- "0..*" Reserva
+Ejemplar "1" -- "0..*" Reserva
+Bibliotecario "1" -- "0..*" Prestamo : registra
+note bottom
+Modelo analitico derivado del alcance publicado;
+no representa el esquema original de la tesis.
+end note
+@enduml

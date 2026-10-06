@@ -1,0 +1,9 @@
+@startuml
+title Ciclo propuesto de un ejemplar - Biblioteca UPEA
+[*] --> Disponible
+Disponible --> Prestado : registrar prestamo
+Disponible --> Reservado : registrar reserva
+Reservado --> Prestado : registrar entrega
+Prestado --> Disponible : registrar devolucion
+Reservado --> Disponible : cancelar reserva
+@enduml

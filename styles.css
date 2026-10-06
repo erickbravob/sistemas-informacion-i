@@ -565,3 +565,15 @@ body{font-size:15px;line-height:1.65;font-optical-sizing:auto}
 .physical-book-suggestion{max-width:850px;padding:15px 16px;background:#eef3ed;border-left:3px solid #24675b}.physical-book-suggestion b{display:block;color:#304b50;font:500 16px/1.4 var(--serif)}.physical-book-suggestion p{margin:7px 0;color:#637269;font-size:11px}.physical-book-suggestion a{color:#236e62;font-size:11px;font-weight:600;text-underline-offset:3px}.physical-book-suggestion small{display:block;margin-top:8px;color:#765b2d;font-size:10px;line-height:1.5}.physical-evidence-label{margin:12px 0 8px;color:#637269;font-size:11px}
 
 .upds-library-link{display:inline-block;margin:0 0 16px;color:#236e62;font-size:11px;font-weight:600;text-underline-offset:3px}
+
+/* Caso real documentado para la Actividad 1 */
+.implementation-case{max-width:850px;margin:32px 0;padding:22px 24px;background:#f2f5ef;border:1px solid #dbe4dc;border-left:4px solid #24675b}
+.case-heading h2,.case-facts h3{margin:9px 0;color:#304b50;font:500 23px/1.3 var(--serif)}
+.case-heading p,.case-diagram figcaption{max-width:760px;color:#52645b;font-size:13px;line-height:1.75}
+.case-source-link,.case-editor-link{display:inline-block;margin-top:9px;color:#236e62;font-size:12px;font-weight:600;text-underline-offset:3px}
+.case-diagram{margin:20px 0 18px;background:#fffefa}
+.case-diagram .activity-topic-illustration{max-height:540px;object-fit:contain}
+.case-diagram figcaption{margin-top:8px}
+.case-facts ul{margin:12px 0 0;padding-left:20px;color:#405c52}
+.case-facts li{margin:8px 0;padding-left:3px;font-size:12px;line-height:1.7}
+@media(max-width:720px){.implementation-case{margin:22px 0;padding:17px}.case-heading h2,.case-facts h3{font-size:20px}.case-diagram .activity-topic-illustration{max-height:none}}

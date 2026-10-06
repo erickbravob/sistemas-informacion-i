@@ -1,0 +1,14 @@
+@startuml
+title Trazabilidad de requisitos - Biblioteca UPEA
+left to right direction
+rectangle "Necesidad: prestamos y reservas web" as N
+rectangle "RF-01: registrar prestamo" as RF1
+rectangle "RF-02: registrar reserva" as RF2
+rectangle "Caso de uso: gestionar circulacion" as UC
+rectangle "Validacion: operacion y reporte" as V
+N --> RF1
+N --> RF2
+RF1 --> UC
+RF2 --> UC
+UC --> V
+@enduml

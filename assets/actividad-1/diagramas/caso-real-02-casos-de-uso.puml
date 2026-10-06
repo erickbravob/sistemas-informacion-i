@@ -1,0 +1,17 @@
+@startuml
+title Casos de uso - Sistema bibliotecario UPEA
+left to right direction
+actor "Personal bibliotecario" as Personal
+actor "Usuario lector" as Usuario
+rectangle "Sistema web de gestion bibliotecaria" {
+ usecase "Registrar prestamo" as Prestamo
+ usecase "Registrar reserva" as Reserva
+ usecase "Consultar catalogo" as Consulta
+ usecase "Generar reportes y estadisticas" as Reporte
+}
+Personal --> Prestamo
+Personal --> Reserva
+Personal --> Reporte
+Usuario --> Consulta
+Usuario --> Reserva
+@enduml
