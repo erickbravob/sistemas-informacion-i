@@ -542,3 +542,26 @@ body{font-size:15px;line-height:1.65;font-optical-sizing:auto}
  .usecase-oval{padding:6px 7px;font-size:10px}.state-sequence{flex-direction:column}
  .state-sequence i{transform:rotate(90deg)}
 }
+/* Actividad 1: ilustraciones temáticas, diagramas y bibliografía */
+.activity-topic-image{max-width:850px;margin:24px 0 30px;background:#fffefa;border:1px solid #dce3dc}
+.activity-topic-image img{display:block;width:100%;height:auto;max-height:440px;object-fit:cover}
+.activity-topic-image figcaption{padding:9px 13px;color:#758078;font-size:10px;line-height:1.55}
+.activity-graphic{max-width:850px;margin:20px 0;padding:12px 14px;border:1px solid #dce3dc;background:#fffefa}
+.activity-topic-illustration{display:block;width:100%;height:auto;margin:12px 0;border-radius:10px}
+.activity-graphic figcaption a{margin-left:7px;color:#24675b;text-underline-offset:3px}
+.research-interpretation{max-width:790px;margin:24px 0;padding:16px 18px;background:#f4eedf;border-left:3px solid #d3a148}
+.research-interpretation p{margin:7px 0 0;color:#52645b;font-size:13px;line-height:1.75}
+.digital-book-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:16px 0}
+.digital-book-card{padding:15px 16px;background:#fffefa;border:1px solid #dce3dc;border-top:3px solid #6da58c}
+.digital-book-card h3{margin:9px 0 7px;font:500 18px/1.25 var(--serif);color:#304b50}
+.digital-book-card p{margin:5px 0;color:#637269;font-size:11px;line-height:1.6}
+.digital-book-card a{display:inline-block;margin-top:8px;color:#236e62;font-size:11px;font-weight:600;text-underline-offset:3px}
+.upds-access-note{padding:10px 12px;background:#fbf2de;color:#765b2d;font-size:10px;line-height:1.6}
+.physical-book-heading{margin:22px 0 10px;padding-top:12px;border-top:1px solid var(--line)}
+.physical-book-heading h3{margin:0;font:500 18px var(--serif)}
+.physical-book-heading p{margin:5px 0;color:#758078;font-size:11px;line-height:1.55}
+@media(max-width:720px){.digital-book-grid{grid-template-columns:1fr}.activity-topic-image{margin:18px 0}.activity-graphic{padding:10px}}
+
+.physical-book-suggestion{max-width:850px;padding:15px 16px;background:#eef3ed;border-left:3px solid #24675b}.physical-book-suggestion b{display:block;color:#304b50;font:500 16px/1.4 var(--serif)}.physical-book-suggestion p{margin:7px 0;color:#637269;font-size:11px}.physical-book-suggestion a{color:#236e62;font-size:11px;font-weight:600;text-underline-offset:3px}.physical-book-suggestion small{display:block;margin-top:8px;color:#765b2d;font-size:10px;line-height:1.5}.physical-evidence-label{margin:12px 0 8px;color:#637269;font-size:11px}
+
+.upds-library-link{display:inline-block;margin:0 0 16px;color:#236e62;font-size:11px;font-weight:600;text-underline-offset:3px}
