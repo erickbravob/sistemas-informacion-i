@@ -7,6 +7,6 @@ Página estática de consulta para conceptos y registros diarios. GitHub Pages p
 1. Añade conceptos al arreglo `concepts` de `conceptos.js`.
 2. Mantén el estado «Síntesis inicial · por contrastar» hasta cotejar los conceptos con el material del docente.
 3. Actualiza el resumen diario de `index.html` cuando registremos una nueva clase.
-4. Guarda los cambios en `main`. GitHub Pages publica la actualización desde esa rama.
+4. Mantén los cambios preparados en local durante la jornada. Súbelos a Git y publícalos solo cuando el estudiante indique «registra en git» para cerrar la jornada.
 
 La publicación contiene solo los archivos de consulta del sitio. Los apuntes y evidencias completos permanecen en el espacio documental de la materia.

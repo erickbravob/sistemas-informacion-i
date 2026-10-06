@@ -295,6 +295,15 @@ function renderRoadmap() {  const steps = [
   document.title = 'Ruta del proyecto final · Sistemas de Información I';
 }
 
+function renderAtlas(item, related) {
+  const neighbors = related.filter((concept) => concept.slug !== item.slug).slice(0, 3);
+  const nodes = neighbors.length
+    ? neighbors.map((concept) =>
+      '<a class="atlas-node" href="#' + escapeHtml(concept.slug) + '"><small>' + escapeHtml(concept.category) + '</small><b>' + escapeHtml(concept.title) + '</b><span>Explorar ↗</span></a>'
+    ).join('')
+    : '<p class="atlas-empty">Todavía no hay relaciones registradas para este concepto.</p>';
+  return '<section class="atlas-section" aria-labelledby="atlas-title"><div class="atlas-heading"><span class="section-index">ATLAS DE SISTEMAS</span><h2 id="atlas-title">Cómo se conecta</h2><p>Este concepto se vincula con:</p></div><div class="atlas-map"><div class="atlas-current"><small>TEMA ACTUAL</small><b>' + escapeHtml(item.title) + '</b></div><div class="atlas-branch" aria-hidden="true"><span>relación</span><i>→</i></div><nav class="atlas-neighbors" aria-label="Conceptos relacionados">' + nodes + '</nav></div></section>';
+}
 function renderArticle(item) {
   const related = (item.related || []).map((slug) => getConcept(slug)).filter(Boolean);
   const roles = (item.roles || []).map((role) =>
@@ -321,7 +330,7 @@ function renderArticle(item) {
     diagramFor(item) +
     requirementTypesSection +
     roleSection +
-    '<section class="related-section"><div class="related-heading"><span class="section-index">SIGUE EL HILO</span><h2>Temas relacionados</h2><p>Abre otro concepto para ver cómo se conecta.</p></div><div class="related-links">' + (related.length ? related.slice(0, 2).map((c) => topicLink(c,'related-link')).join('') : '<a href="#inicio" class="related-link">Volver al cuaderno</a>') + '</div></section>' +
+    renderAtlas(item, related) +
     sourcesSection +
     '<div class="article-status"><span class="status-dot"></span><span>Síntesis inicial · pendiente de contrastar con el material del docente</span></div></article>';
   document.title = item.title + ' · Sistemas de Información I';
