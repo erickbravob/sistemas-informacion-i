@@ -1,14 +1,14 @@
 @startuml
-title Trazabilidad de requisitos - Biblioteca UPEA
+title Necesidad y trazabilidad · Catálogo público UPDS
 left to right direction
-rectangle "Necesidad: prestamos y reservas web" as N
-rectangle "RF-01: registrar prestamo" as RF1
-rectangle "RF-02: registrar reserva" as RF2
-rectangle "Caso de uso: gestionar circulacion" as UC
-rectangle "Validacion: operacion y reporte" as V
-N --> RF1
-N --> RF2
-RF1 --> UC
-RF2 --> UC
-UC --> V
+rectangle "Necesidad\nLocalizar una obra" as N
+rectangle "RF-01\nBuscar registros" as R1
+rectangle "RF-02\nConsultar ejemplares" as R2
+rectangle "Caso de uso\nBuscar y revisar ficha" as U
+rectangle "Criterio de aceptación\nCoincidencias y disponibilidad visibles" as T
+N --> R1
+N --> R2
+R1 --> U
+R2 --> U
+U --> T
 @enduml

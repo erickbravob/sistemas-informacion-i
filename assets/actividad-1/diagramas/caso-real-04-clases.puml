@@ -1,65 +1,40 @@
 @startuml
-title Modelo logico analitico · Biblioteca UPEA
+title Modelo conceptual analítico · Catálogo bibliográfico UPDS
 left to right direction
 skinparam linetype ortho
-skinparam nodesep 70
-skinparam ranksep 70
-skinparam classAttributeIconSize 0
-skinparam shadowing false
-skinparam class {
-  BackgroundColor #EAF2F8
-  BorderColor #416CBB
-  ArrowColor #0075A9
-  FontColor #1D4696
-  FontSize 15
-  AttributeFontSize 13
+skinparam nodesep 50
+skinparam ranksep 55
+class Obra {
++idObra
+titulo
+edicion
+isbn
 }
-hide empty methods
-
-class Usuario {
-  +id_usuario: entero <<PK>>
-  nombre: texto
+class Autor {
++idAutor
+nombre
 }
-class Prestamo {
-  +id_prestamo: entero <<PK>>
-  id_usuario: entero <<FK>>
-  id_ejemplar: entero <<FK>>
-  fecha_prestamo: fecha
-  fecha_devolucion: fecha
+class Editorial {
++idEditorial
+nombre
 }
 class Ejemplar {
-  +id_ejemplar: entero <<PK>>
-  id_titulo: entero <<FK>>
-  codigo: texto
-  estado: enumeracion
-}
-class Titulo {
-  +id_titulo: entero <<PK>>
-  isbn: texto
-  titulo: texto
++idEjemplar
+codigo
+disponibilidad
+ubicacion
 }
 class Reserva {
-  +id_reserva: entero <<PK>>
-  id_usuario: entero <<FK>>
-  id_ejemplar: entero <<FK>>
-  fecha_solicitud: fecha
-  estado: enumeracion
++idReserva
+fechaSolicitud
+estado
 }
-
-' Guías invisibles para conservar una composición limpia al editar el modelo.
-Usuario -[hidden]right- Prestamo
-Prestamo -[hidden]right- Ejemplar
-Ejemplar -[hidden]right- Titulo
-Prestamo -[hidden]down- Reserva
-
-Usuario "1" -- "0..*" Prestamo : registra
-Ejemplar "1" -- "0..*" Prestamo : aparece en
-Usuario "1" -- "0..*" Reserva : solicita
-Ejemplar "1" -- "0..*" Reserva : se reserva
-Titulo "1" -- "0..*" Ejemplar : describe
-
+Obra "*" -- "*" Autor : autoria
+Editorial "1" -- "0..*" Obra : publica
+Obra "1" -- "0..*" Ejemplar : tiene
+Ejemplar "1" -- "0..*" Reserva : asociado
 note bottom
-Reconstruccion logica basada en las funciones publicadas por la UPEA.
-No representa el esquema original de la tesis.
+Modelo analitico derivado de los datos visibles en el catalogo publico.
+No representa el esquema ni la arquitectura interna de UPDS.
 end note
 @enduml

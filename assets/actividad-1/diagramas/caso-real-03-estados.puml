@@ -1,9 +1,9 @@
 @startuml
-title Ciclo propuesto de un ejemplar - Biblioteca UPEA
-[*] --> Disponible
-Disponible --> Prestado : registrar prestamo
-Disponible --> Reservado : registrar reserva
-Reservado --> Prestado : registrar entrega
-Prestado --> Disponible : registrar devolucion
-Reservado --> Disponible : cancelar reserva
+title Flujo visible de consulta · Catálogo público UPDS
+[*] --> Resultados : buscar
+Resultados --> Ficha : abrir registro
+Ficha --> Disponibilidad : revisar ejemplares
+Disponibilidad --> Reserva : opción disponible
+Disponibilidad --> Ficha : volver al registro
+Reserva --> [*] : iniciar interacción
 @enduml

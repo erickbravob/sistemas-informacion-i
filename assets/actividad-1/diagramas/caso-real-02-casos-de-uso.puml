@@ -1,17 +1,15 @@
 @startuml
-title Casos de uso - Sistema bibliotecario UPEA
+title Casos de uso · Catálogo público UPDS
 left to right direction
-actor "Personal bibliotecario" as Personal
-actor "Usuario lector" as Usuario
-rectangle "Sistema web de gestion bibliotecaria" {
- usecase "Registrar prestamo" as Prestamo
- usecase "Registrar reserva" as Reserva
- usecase "Consultar catalogo" as Consulta
- usecase "Generar reportes y estadisticas" as Reporte
+actor "Visitante" as V
+rectangle "Catálogo público de biblioteca" {
+usecase "Buscar registros" as Buscar
+usecase "Consultar ficha" as Ficha
+usecase "Revisar ejemplares\ny disponibilidad" as Copias
+usecase "Iniciar reserva\n(si está habilitada)" as Reserva
 }
-Personal --> Prestamo
-Personal --> Reserva
-Personal --> Reporte
-Usuario --> Consulta
-Usuario --> Reserva
+V --> Buscar
+V --> Ficha
+V --> Copias
+V --> Reserva
 @enduml
