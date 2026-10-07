@@ -1,35 +1,65 @@
 @startuml
-title Modelo logico analitico - Biblioteca UPEA
+title Modelo logico analitico · Biblioteca UPEA
+left to right direction
+skinparam linetype ortho
+skinparam nodesep 70
+skinparam ranksep 70
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam class {
+  BackgroundColor #EAF2F8
+  BorderColor #416CBB
+  ArrowColor #0075A9
+  FontColor #1D4696
+  FontSize 15
+  AttributeFontSize 13
+}
+hide empty methods
+
 class Usuario {
- id_usuario : entero
- nombre : texto
-}
-class Bibliotecario {
- id_bibliotecario : entero
- nombre_usuario : texto
-}
-class Ejemplar {
- id_ejemplar : entero
- codigo : texto
- estado : enumeracion
+  +id_usuario: entero <<PK>>
+  nombre: texto
 }
 class Prestamo {
- id_prestamo : entero
- fecha_prestamo : fecha
- fecha_devolucion : fecha
+  +id_prestamo: entero <<PK>>
+  id_usuario: entero <<FK>>
+  id_ejemplar: entero <<FK>>
+  fecha_prestamo: fecha
+  fecha_devolucion: fecha
+}
+class Ejemplar {
+  +id_ejemplar: entero <<PK>>
+  id_titulo: entero <<FK>>
+  codigo: texto
+  estado: enumeracion
+}
+class Titulo {
+  +id_titulo: entero <<PK>>
+  isbn: texto
+  titulo: texto
 }
 class Reserva {
- id_reserva : entero
- fecha_solicitud : fecha
- estado : enumeracion
+  +id_reserva: entero <<PK>>
+  id_usuario: entero <<FK>>
+  id_ejemplar: entero <<FK>>
+  fecha_solicitud: fecha
+  estado: enumeracion
 }
-Usuario "1" -- "0..*" Prestamo
-Ejemplar "1" -- "0..*" Prestamo
-Usuario "1" -- "0..*" Reserva
-Ejemplar "1" -- "0..*" Reserva
-Bibliotecario "1" -- "0..*" Prestamo : registra
+
+' Guías invisibles para conservar una composición limpia al editar el modelo.
+Usuario -[hidden]right- Prestamo
+Prestamo -[hidden]right- Ejemplar
+Ejemplar -[hidden]right- Titulo
+Prestamo -[hidden]down- Reserva
+
+Usuario "1" -- "0..*" Prestamo : registra
+Ejemplar "1" -- "0..*" Prestamo : aparece en
+Usuario "1" -- "0..*" Reserva : solicita
+Ejemplar "1" -- "0..*" Reserva : se reserva
+Titulo "1" -- "0..*" Ejemplar : describe
+
 note bottom
-Modelo analitico derivado del alcance publicado;
-no representa el esquema original de la tesis.
+Reconstruccion logica basada en las funciones publicadas por la UPEA.
+No representa el esquema original de la tesis.
 end note
 @enduml
