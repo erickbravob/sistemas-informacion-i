@@ -1,5 +1,6 @@
 const activity1EvidenceDbName = 'sis1-actividad1-evidencias';
 const activity1ImageUrls = new Map();
+const activity1DefaultMembers = ['Ashley Aguilar Perez','Nicolas Soria Yabeta','Erick Bravo Borges','Jose Manuel Callecusi Guarachi','Ruben Churqui Limachi'];
 function openActivity1EvidenceDb() {
   return new Promise((resolve, reject) => {
     const request = indexedDB.open(activity1EvidenceDbName, 1);
@@ -49,7 +50,7 @@ function saveActivity1LocalData() {
 function loadActivity1LocalData() {
   const data = getActivity1LocalData();
   page.querySelectorAll('[data-photo-metadata]').forEach((field) => { field.value = data[field.dataset.photoMetadata] || ''; });
-  page.querySelectorAll('[data-team-member]').forEach((field) => { field.value = data['member-' + field.dataset.teamMember] || ''; });
+  page.querySelectorAll('[data-team-member]').forEach((field) => { field.value = data['member-' + field.dataset.teamMember] || activity1DefaultMembers[Number(field.dataset.teamMember)] || ''; });
   page.querySelectorAll('[data-saved-member]').forEach((label) => {
     const name = data['member-' + label.dataset.savedMember];
     label.textContent = name || 'pendiente';
@@ -111,7 +112,7 @@ function renderActivity1() {
     '<a class="activity-topic-entry" href="#actividad-1-' + escapeHtml(theme.slug) + '"><span class="activity-topic-number">0' + (index+1) + '</span><span><b>' + escapeHtml(theme.shortTitle) + '</b><small>' + escapeHtml(theme.focus) + '</small></span><i aria-hidden="true">↗</i></a>'
   ).join('');
   const members = [0,1,2,3,4].map((n) =>
-    '<label class="activity-member"><span>Integrante 0' + (n+1) + '</span><input type="text" data-team-member="' + n + '" placeholder="Nombre pendiente" autocomplete="name"></label>'
+    '<label class="activity-member"><span>INTEGRANTE 0' + (n+1) + '</span><input type="text" data-team-member="' + n + '" value="' + escapeHtml(activity1DefaultMembers[n]) + '" placeholder="Editar nombre" autocomplete="name"></label>'
   ).join('');
   const tasks = activity1Steps.map((step) => {
     const related = step.related.map((slug) => getConcept(slug)).filter(Boolean).slice(0,2).map((concept) => topicLink(concept,'activity-concept-link')).join('');
@@ -151,7 +152,7 @@ function renderActivity1Topic(theme) {
   const physical=study.physical;
   const physicalCard='<article class="physical-book-suggestion"><b>'+escapeHtml(physical.title)+'</b><p>'+escapeHtml(physical.authors)+' · '+escapeHtml(physical.publisher)+' · '+escapeHtml(physical.year)+' · '+escapeHtml(physical.pages)+'</p><a href="'+escapeHtml(physical.url)+'" target="_blank" rel="noopener noreferrer">Consultar ficha bibliográfica ↗</a><small>'+escapeHtml(physical.status)+'</small></article>';
   const slideFiles=['tema-01-uml-requisitos-v23.pptx','tema-02-actores-casos-v9.pptx','tema-03-objetos-estados-v4.pptx','tema-04-modelo-datos-v4.pptx'];
-  const deckUrl='https://erickbravob.github.io/sistemas-informacion-i/materiales/actividad-1/'+slideFiles[idx];
+  const deckUrl='https://erickbravob.github.io/sistemas-informacion-i/materiales/actividad-1/'+slideFiles[idx]+'?v=20261007-portada-refs-1';
   const slideLink='<section class="topic-slide-link"><span class="section-index">PRESENTACIÓN · TEMA 0'+(idx+1)+'</span><p>'+escapeHtml(theme.title)+'</p><a href="https://view.officeapps.live.com/op/view.aspx?src='+encodeURIComponent(deckUrl)+'" target="_blank" rel="noopener noreferrer">Ver presentación en línea ↗</a></section>';
   const caseStudy='<section class="implementation-case"><div class="case-heading"><span class="section-index">CASO REAL · CATÁLOGO PÚBLICO UPDS</span><h2>'+escapeHtml(study.title)+'</h2><p>'+escapeHtml(study.summary)+'</p><a class="case-source-link" href="'+escapeHtml(study.sourceUrl)+'" target="_blank" rel="noopener noreferrer">'+escapeHtml(study.sourceTitle)+' ↗</a></div><figure class="activity-graphic case-diagram"><span class="section-index">MODELO APLICADO · '+escapeHtml(theme.shortTitle)+'</span><img class="activity-topic-illustration" src="https://www.plantuml.com/plantuml/svg/'+study.editor.split('/').pop()+'" alt="'+escapeHtml(study.alt)+'" loading="lazy"><figcaption>'+escapeHtml(study.boundary)+'</figcaption><a class="case-editor-link" href="'+escapeHtml(study.editor)+'" target="_blank" rel="noopener noreferrer">Abrir y editar el UML en PlantUML ↗</a></figure><div class="case-facts"><h3>Aplicación al sistema</h3><ul>'+study.observations.map((point)=>'<li>'+escapeHtml(point)+'</li>').join('')+'</ul></div></section>';
   page.innerHTML='<article class="activity-topic-page"><div class="breadcrumb"><a href="#inicio">Inicio</a><span>/</span><a href="#actividad-1">Actividad 1</a><span>/</span><span>'+escapeHtml(theme.shortTitle)+'</span></div>'+
