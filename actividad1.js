@@ -17,8 +17,9 @@ const activity1Research = [
     physicalBook: {"title": "UML con Rational Rose", "authors": "Gesvin Romero Moreno", "publisher": "Grupo Editorial Megabyte", "year": "2004", "pages": "1.ª edición", "url": "https://biblioteca.upds.edu.bo/", "status": "Datos bibliográficos y páginas consultadas documentados en las fotografías del ejemplar físico."},
     references: [
       ['Object Management Group. (2017). Unified Modeling Language (UML), Version 2.5.1.', 'https://www.omg.org/spec/UML/2.5.1/PDF'],
-      ['NASA. (2016). NASA Systems Engineering Handbook, Appendix C: How to Write a Good Requirement.', 'https://www.nasa.gov/reference/system-engineering-handbook-appendix/'],
-      ['NASA Software Engineering Handbook. (s. f.). SWE-109: Software Requirements Specification.', 'https://swehb.nasa.gov/spaces/7150/pages/16449740/SWE-109%2B-%2BSoftware%2BRequirements%2BSpecification']
+      ['PlantUML. (s. f.). Quick start: diagramas desde texto.', 'https://plantuml.com/en/starting'],
+      ['diagrams.net. (s. f.). UML diagrams.', 'https://www.drawio.com/docs/diagram-types/uml/'],
+      ['StarUML. (s. f.). Modelado UML.', 'https://staruml.io/']
     ]
   },
   {
