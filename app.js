@@ -8,7 +8,7 @@ const sidebar = document.querySelector('#sidebar');
 const menuToggle = document.querySelector('#menu-toggle');
 let activeCategory = '';
 const monthNames = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
-const classDays = [...new Set(concepts.map((item) => item.day).filter(Boolean))].sort();
+const classDays = [...new Set(concepts.flatMap((item) => [item.day, item.updatedDay]).filter(Boolean))].sort();
 let selectedClassDay = classDays[classDays.length - 1] || '';
 let calendarMonth = selectedClassDay ? new Date(selectedClassDay + 'T12:00:00') : new Date();
 
@@ -124,7 +124,7 @@ function diagramFor(item) {
       graphic = '<div class="synergy-graphic"><div class="synergy-parts"><span>Parte A</span><span>Parte B</span><span>Parte C</span></div><span class="big-arrow">↓</span><div class="synergy-result">Resultado conjunto <small>supera el aporte aislado</small></div></div>';
       break;
     case 'entropy':
-      graphic = '<div class="change-graphic"><div class="order-state"><b>Organización</b><small>datos y procesos alineados</small></div><span class="big-arrow">→</span><div class="order-state order-fade"><b>Pérdida de orden</b><small>sin renovación ni control</small></div></div>';
+      graphic = '<div class="change-graphic"><div class="order-state"><b>Organización</b><small>datos y procesos alineados</small></div><span class="big-arrow">→</span><div class="order-state order-fade"><b>Pérdida de orden</b><small>sin renovación ni control</small></div></div><div class="entropy-dice-panel"><img src="assets/entropia-dado.svg" alt="Las seis caras equiprobables de un dado"><p>Seis resultados · probabilidad 1/6 por cara</p></div>';
       break;
     case 'negentropy':
       graphic = flow([['Información','actualizada'],['Recursos','incorporados'],['Sistema','organización sostenida',true]]);
@@ -171,7 +171,7 @@ function renderCalendar() {
   for (let date = 1; date <= daysInMonth; date += 1) {
     const day = year + '-' + String(month + 1).padStart(2, '0') + '-' + String(date).padStart(2, '0');
     if (classDays.includes(day)) {
-      const count = concepts.filter((item) => item.day === day).length;
+      const count = concepts.filter((item) => item.day === day || item.updatedDay === day).length;
       cells.push('<button class="calendar-day is-class-day' + (day === selectedClassDay ? ' is-selected' : '') + '" type="button" data-class-day="' + day + '" aria-pressed="' + (day === selectedClassDay) + '" aria-label="' + date + ' de ' + monthNames[month] + ' de ' + year + ', día de clase, ' + count + ' conceptos"><span>' + date + '</span><i aria-hidden="true"></i></button>');
     } else {
       cells.push('<span class="calendar-day" aria-hidden="true">' + date + '</span>');
@@ -185,7 +185,7 @@ function renderDayDetail() {
   if (!selectedClassDay) {
     detail.innerHTML = '<div class="calendar-empty-state"><span class="section-index">SIN REGISTROS ESTE MES</span><p>Aún no hay apuntes asociados a una jornada de clase para este mes.</p></div>';
     return;
-  }  const dayConcepts = concepts.filter((item) => item.day === selectedClassDay);
+  }  const dayConcepts = concepts.filter((item) => item.day === selectedClassDay || item.updatedDay === selectedClassDay);
   const categoriesForDay = [...new Set(dayConcepts.map((item) => item.category))];
   const summaries = {
     '2026-10-02': {
@@ -195,6 +195,10 @@ function renderDayDetail() {
     '2026-10-05': {
       title: 'Especificación de requisitos del sistema',
       text: 'Se registró el proceso de identificar, analizar, documentar y validar necesidades, y se distinguieron los roles del cliente y el usuario final.'
+    },
+    '2026-10-08': {
+      title: 'Sinergia, entropía y neguentropía',
+      text: 'Se dio continuidad a estos principios y se profundizó la entropía de Shannon con H(X) y el dado justo: log₂(6) ≈ 2,585 bits. Se aplicó al análisis de la incertidumbre en resultados del sistema y se aclaró que debe acompañarse con indicadores de éxito, fallas, tiempo de respuesta y disponibilidad. También se revisaron vistas UML y el inicio del diseño E-R.'
     }
   };
   const summary = summaries[selectedClassDay] || {
@@ -323,11 +327,15 @@ function renderArticle(item) {
   const sourcesSection = sources
     ? '<details class="source-details"><summary>Fuentes consultadas (' + item.sources.length + ')</summary><ul>' + sources + '</ul></details>'
     : '';
+  const entropySection = item.entropyAnalysis
+    ? '<section class="entropy-analysis"><span class="section-index">CÁLCULO E INTERPRETACIÓN</span><h2>Componentes de la fórmula</h2><p>' + escapeHtml(item.entropyAnalysis) + '</p><div class="entropy-system-example"><b>Aplicación al funcionamiento</b><p>' + escapeHtml(item.systemApplication || '') + '</p></div></section>'
+    : '';
   page.innerHTML =
     '<article class="article-page"><div class="breadcrumb"><a href="#inicio">Inicio</a><span>/</span><span>' + escapeHtml(item.category) + '</span><span>/</span><span>' + escapeHtml(item.title) + '</span></div>' +
     '<header class="article-head"><div class="article-meta"><span class="category-pill">' + escapeHtml(item.category) + '</span><span class="record-id">REGISTRO SIS1 · ' + escapeHtml(item.id) + '</span></div><h1>' + escapeHtml(item.title) + '</h1><p class="definition">' + escapeHtml(item.definition) + '</p></header>' +
     '<section class="example-panel"><span class="example-label">EJEMPLO</span><p>' + escapeHtml(item.example || 'Este concepto se relaciona con los elementos y objetivos del sistema que se esté analizando.') + '</p></section>' +
     diagramFor(item) +
+    entropySection +
     requirementTypesSection +
     roleSection +
     renderAtlas(item, related) +
