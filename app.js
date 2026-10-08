@@ -212,16 +212,79 @@ function renderDayDetail() {
     '<h2>' + escapeHtml(summary.title) + '</h2><p>' + escapeHtml(summary.text) + '</p>' +
     '<div class="day-tags" aria-label="Temas incluidos">' + categoriesForDay.slice(0, 4).map((category) => '<span>' + escapeHtml(category) + '</span>').join('') + (categoriesForDay.length > 4 ? '<span>+' + (categoriesForDay.length - 4) + ' áreas</span>' : '') + '</div>' +
     '<p class="class-day-count">' + dayConcepts.length + ' conceptos en esta jornada</p>' +
+    '<a class="class-day-open" href="#jornada-' + selectedClassDay + '"><span><b>Ver la clase completa</b><small>Temas, explicaciones y esquemas en una página</small></span><span aria-hidden="true">→</span></a>' +
     (selectedClassDay === '2026-10-02' ? '<a class="exam-trigger class-day-resource" href="https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Ferickbravob.github.io%2Fsistemas-informacion-i%2Fmateriales%2Fteoria-general-sistemas-2026-10-02.pptx" target="_blank" rel="noopener noreferrer"><span><b>Presentación del docente</b><small>Teoría General de Sistemas · 2 de octubre</small></span><span aria-hidden="true">↗</span></a>' : '') +
     (exam ? '<button class="exam-trigger" type="button" data-highlight="' + escapeHtml(exam.slug) + '"><span><b>Repaso de examen</b><small>Pregunta de práctica · ' + escapeHtml(exam.title) + '</small></span><span aria-hidden="true">↗</span></button>' : '') +
     '</article>';
+}
+
+function renderClassDay(day) {
+  const dayConcepts = concepts.filter((item) => item.day === day || item.updatedDay === day);
+  if (!dayConcepts.length) {
+    renderHome();
+    return;
+  }
+  const summaries = {
+    '2026-10-02': {
+      title: 'Bases para analizar un sistema',
+      text: 'Se organizaron los fundamentos, niveles y clasificaciones de los sistemas y de los sistemas de información. También se relacionaron sus propiedades, el entorno y la regulación para orientar el análisis del proyecto final.'
+    },
+    '2026-10-05': {
+      title: 'Especificación de requisitos del sistema',
+      text: 'Se registró el proceso de identificar, analizar, documentar y validar necesidades, y se distinguieron los roles del cliente y el usuario final.'
+    },
+    '2026-10-08': {
+      title: 'Sinergia, entropía y neguentropía',
+      text: 'Se dio continuidad a estos principios y se profundizó la entropía de Shannon con H(X) y el dado justo: log₂(6) ≈ 2,585 bits. Se aplicó al análisis de la incertidumbre en resultados del sistema y se aclaró que debe acompañarse con indicadores de éxito, fallas, tiempo de respuesta y disponibilidad. También se revisaron vistas UML y el inicio del diseño E-R.'
+    }
+  };
+  const summary = summaries[day] || {
+    title: 'Apuntes de la jornada',
+    text: 'En esta jornada se registraron ' + dayConcepts.length + ' conceptos. El calendario y el temario general siguen disponibles para consultar otras clases.'
+  };
+  const [year, month, date] = day.split('-');
+  const formattedDate = Number(date) + ' de ' + monthNames[Number(month) - 1] + ' de ' + year;
+  const topicIndex = dayConcepts.map((item, index) =>
+    '<a href="#jornada-tema-' + escapeHtml(item.slug) + '"><span>' + String(index + 1).padStart(2, '0') + '</span>' + escapeHtml(item.title) + '<i aria-hidden="true">↓</i></a>'
+  ).join('');
+  const topicSections = dayConcepts.map((item, index) => {
+    const entropyDetails = item.entropyAnalysis
+      ? '<section class="entropy-analysis"><span class="section-index">CÁLCULO E INTERPRETACIÓN</span><h3>Componentes de la fórmula</h3><p>' + escapeHtml(item.entropyAnalysis) + '</p><div class="entropy-system-example"><b>Aplicación al funcionamiento</b><p>' + escapeHtml(item.systemApplication || '') + '</p></div></section>'
+      : '';
+    const sources = (item.sources || []).map((source) =>
+      '<li><a href="' + escapeHtml(source.url) + '" target="_blank" rel="noopener noreferrer">' + escapeHtml(source.title) + '</a></li>'
+    ).join('');
+    const sourcesSection = sources
+      ? '<details class="source-details"><summary>Fuentes consultadas (' + item.sources.length + ')</summary><ul>' + sources + '</ul></details>'
+      : '';
+    const examReview = item.examQuestion
+      ? '<button class="exam-trigger" type="button" data-highlight="' + escapeHtml(item.slug) + '"><span><b>Repaso de examen</b><small>Pregunta de práctica</small></span><span aria-hidden="true">↗</span></button>'
+      : '';
+    return '<article class="class-concept" id="jornada-tema-' + escapeHtml(item.slug) + '"><header class="class-concept-head"><div class="article-meta"><span class="category-pill">' + escapeHtml(item.category) + '</span><span class="record-id">TEMA ' + String(index + 1).padStart(2, '0') + ' · SIS1-' + escapeHtml(item.id) + '</span></div><h2>' + escapeHtml(item.title) + '</h2><p class="definition">' + escapeHtml(item.definition) + '</p></header>' +
+      '<section class="example-panel"><span class="example-label">EJEMPLO</span><p>' + escapeHtml(item.example || 'Este concepto se relaciona con los elementos y objetivos del sistema que se esté analizando.') + '</p></section>' +
+      diagramFor(item) + entropyDetails + sourcesSection + examReview + '</article>';
+  }).join('');
+  const currentIndex = classDays.indexOf(day);
+  const previousDay = classDays[currentIndex - 1];
+  const nextDay = classDays[currentIndex + 1];
+  page.innerHTML =
+    '<article class="class-page"><div class="breadcrumb"><a href="#inicio">Calendario</a><span>/</span><span>' + escapeHtml(formattedDate) + '</span></div>' +
+    '<header class="article-head class-page-head"><span class="eyebrow">JORNADA DE CLASE · ' + escapeHtml(formattedDate.toLocaleUpperCase('es')) + '</span><h1>' + escapeHtml(summary.title) + '</h1><p class="welcome-lead">' + escapeHtml(summary.text) + '</p><p class="class-page-count">' + dayConcepts.length + ' temas desarrollados · cada esquema corresponde a los conceptos de esta fecha</p></header>' +
+    '<nav class="class-topic-index" aria-label="Temas de esta jornada"><span class="section-index">CONTENIDO DE LA CLASE</span><div>' + topicIndex + '</div></nav>' +
+    '<div class="class-concept-list">' + topicSections + '</div>' +
+    '<nav class="class-page-navigation" aria-label="Navegación entre jornadas">' +
+      (previousDay ? '<a href="#jornada-' + previousDay + '"><small>JORNADA ANTERIOR</small><b>← ' + escapeHtml(formatShortDate(previousDay)) + '</b></a>' : '<span></span>') +
+      '<a class="class-calendar-return" href="#inicio"><small>CALENDARIO</small><b>Volver a las fechas</b></a>' +
+      (nextDay ? '<a href="#jornada-' + nextDay + '"><small>JORNADA SIGUIENTE</small><b>' + escapeHtml(formatShortDate(nextDay)) + ' →</b></a>' : '<span></span>') +
+    '</nav></article>';
+  document.title = summary.title + ' · ' + formattedDate + ' · Sistemas de Información I';
 }
 
 function renderHome() {
   page.innerHTML =
     '<section class="welcome-page"><div class="daily-kicker"><span class="eyebrow">SISTEMAS DE INFORMACIÓN I</span><span class="day-total">' + classDays.length + ' jornadas con clase</span></div>' +
     '<h1>Calendario de<br><em>clases.</em></h1>' +
-    '<p class="welcome-lead">Los días con apuntes registrados aparecen resaltados. Selecciona uno para consultar el resumen y los conceptos trabajados.</p>' +
+    '<p class="welcome-lead">Los días con apuntes registrados aparecen resaltados. Selecciona una fecha para abrir en una página todos los temas, conceptos y esquemas de esa clase.</p>' +
     '<section class="calendar-panel" aria-label="Calendario de jornadas de clase"><div class="calendar-top"><span class="section-index">AVANCE DE LA MATERIA</span><div class="calendar-controls"><button type="button" data-calendar-step="-1" aria-label="Mes anterior">‹</button><h2 id="calendar-month"></h2><button type="button" data-calendar-step="1" aria-label="Mes siguiente">›</button></div></div>' +
     '<div class="calendar-body"><div class="calendar-left"><div class="calendar-weekdays" aria-hidden="true"><span>L</span><span>M</span><span>M</span><span>J</span><span>V</span><span>S</span><span>D</span></div><div class="calendar-grid" id="calendar-grid"></div><div class="calendar-legend"><i></i><span>Día con apuntes de clase</span></div></div><div id="calendar-day-detail" aria-live="polite"></div></div></section>' +
     '<p class="review-note"><i></i> El calendario resalta solo fechas con conceptos registrados; no agrega fechas de clase supuestas.</p></section>';
@@ -346,10 +409,15 @@ function renderArticle(item) {
 function renderPage() {
   const slug = decodeURIComponent(location.hash.slice(1));
   const activeItem = getConcept(slug);
+  const classDayMatch = slug.match(/^jornada-(\d{4}-\d{2}-\d{2})$/);
   activeCategory = activeItem ? activeItem.category : '';
   renderTopicNav();
   if (activeItem) {
     renderArticle(activeItem);
+  } else if (classDayMatch && classDays.includes(classDayMatch[1])) {
+    selectedClassDay = classDayMatch[1];
+    calendarMonth = new Date(selectedClassDay + 'T12:00:00');
+    renderClassDay(selectedClassDay);
   } else if (slug === 'ruta') {
     renderRoadmap();
   } else if (slug === 'actividad-1') {
@@ -432,8 +500,7 @@ document.addEventListener('click', (event) => {
   const dayButton = event.target.closest('[data-class-day]');
   if (dayButton) {
     selectedClassDay = dayButton.dataset.classDay;
-    renderCalendar();
-    renderDayDetail();
+    location.hash = 'jornada-' + selectedClassDay;
   }
 });document.addEventListener('change', (event) => {
   const checkbox = event.target.closest('[data-activity-check]');
