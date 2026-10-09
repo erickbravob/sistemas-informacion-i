@@ -342,6 +342,7 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid #63bb
 .source-details a{color:#36796c;text-underline-offset:2px}
 @media(max-width:560px){.roles-grid{grid-template-columns:1fr}.requirement-role{padding:12px}.roles-heading h2{font-size:21px}}
 .class-day-resource{text-decoration:none}
+.class-relation-image{display:block;width:100%;height:auto;margin:0 auto}
 
 /* Página completa de cada jornada */
 .class-day-open{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-top:19px;padding:13px 14px;background:#edf4ee;border:1px solid #d5e5d8;color:#315f54;text-decoration:none}
@@ -626,3 +627,62 @@ body{font-size:15px;line-height:1.65;font-optical-sizing:auto}
 
 /* Entropía: dado y lectura del cálculo */
 .entropy-dice-panel{margin:22px auto 4px;max-width:680px;text-align:center}.entropy-dice-panel img{display:block;width:100%;height:auto;margin:0 auto}.entropy-dice-panel p{margin:9px 0 0;color:#65736d;font-size:11px}.entropy-analysis{max-width:780px;margin:25px 0;padding:20px 22px;background:#f5f8f5;border:1px solid #dce5dc}.entropy-analysis h2{margin:8px 0 12px;color:#263c34;font-size:22px}.entropy-analysis p{margin:0;color:#43534b;font-size:13px;line-height:1.75}.entropy-system-example{margin-top:14px;padding-top:13px;border-top:1px solid #dce5dc}.entropy-system-example>b{display:block;margin-bottom:6px;color:#34634e;font-size:11px;text-transform:uppercase;letter-spacing:.06em}
+
+/* Guía práctica para la Evaluación 1 */
+.project-link.evaluation-link{margin-top:8px;background:#dbe9e2;color:var(--ink);border:1px solid #bfd2c7}
+.project-link.evaluation-link:hover{background:#cddfd5}
+.project-link.evaluation-link .project-icon{background:#c2dbce;color:#285e55}
+.project-link.evaluation-link small{color:#61766c}
+.evaluation-entry{display:flex;flex-direction:column;gap:7px;max-width:780px;margin:24px 0 0;padding:17px 19px;background:#e8f1eb;border:1px solid #cdded2;border-left:3px solid var(--teal);text-decoration:none}
+.evaluation-entry:hover{background:#deebe3;border-color:#a8c6b4}
+.evaluation-entry .section-index{color:var(--teal);font-size:8px}
+.evaluation-entry b{font:500 20px var(--serif);color:var(--ink)}
+.evaluation-entry>span:last-child{font-size:11px;color:#60726a}
+.evaluation-page{max-width:900px}
+.evaluation-head{max-width:810px;margin-bottom:25px}
+.evaluation-head h1{font-size:clamp(38px,4.7vw,58px)}
+.evaluation-summary{margin:24px 0 17px;padding:19px 21px;background:#e8f1eb;border:1px solid #ceded2}
+.evaluation-summary>.section-index{color:var(--teal)}
+.evaluation-summary>p{max-width:780px;margin:9px 0 16px;color:#3e5850;font:500 16px/1.7 var(--serif)}
+.evaluation-flow{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.evaluation-flow span{padding:7px 10px;background:var(--white);border:1px solid #d8e4db;color:#395a50;font-size:10px}
+.evaluation-flow i{color:var(--teal);font-style:normal}
+.evaluation-index{display:flex;gap:7px;flex-wrap:wrap;margin:18px 0 28px;padding-bottom:19px;border-bottom:1px solid var(--line)}
+.evaluation-index a{padding:6px 9px;background:#edf2ed;color:#376e64;text-decoration:none;font:9px var(--mono)}
+.evaluation-index a:hover{background:#dcebe2}
+.evaluation-section{max-width:850px;margin:30px 0 0;padding-top:21px;border-top:1px solid var(--line);scroll-margin-top:calc(var(--header-height) + 20px)}
+.evaluation-section-title{display:flex;align-items:flex-start;gap:13px;margin-bottom:16px}
+.evaluation-section-title>span{width:32px;height:32px;display:grid;place-items:center;background:#e1eee6;border:1px solid #c9dbcf;color:var(--teal);font:10px var(--mono);flex:none}
+.evaluation-section-title .section-index{color:var(--teal);font-size:8px}
+.evaluation-section-title h2{margin:4px 0 0;font:500 clamp(22px,2.6vw,29px)/1.2 var(--serif);letter-spacing:-.02em}
+.evaluation-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.evaluation-cards article{padding:14px;background:var(--white);border:1px solid #e1e6df}
+.evaluation-cards h3{margin:0 0 6px;color:#31695e;font:500 16px var(--serif)}
+.evaluation-cards p,.evaluation-prose{margin:0;color:#5d6d66;font-size:11px;line-height:1.75}
+.evaluation-prose{max-width:790px;margin:0 0 14px;font-size:12px}
+.study-example{margin-top:13px;padding:14px 16px;background:#f0f4ee;border-left:3px solid #80aa96}
+.study-example>b{display:block;margin-bottom:5px;color:#32685e;font-size:10px}
+.study-example p{margin:0;color:#596a61;font-size:11px;line-height:1.7}
+.study-example p+p{margin-top:9px}
+.study-note{color:#506b60!important}
+.evaluation-table-wrap{overflow-x:auto;border:1px solid #dfe5de;background:var(--white)}
+.evaluation-table{width:100%;border-collapse:collapse;font-size:10px;line-height:1.6}
+.evaluation-table th,.evaluation-table td{padding:10px 11px;text-align:left;vertical-align:top;border-bottom:1px solid #e5e9e3}
+.evaluation-table th{background:#edf2ed;color:#396a60;font:9px var(--mono);letter-spacing:.04em}
+.evaluation-table td:first-child{min-width:125px;color:#304e47;font-weight:600}
+.evaluation-table tr:last-child td{border-bottom:0}
+.hash-example{display:grid;grid-template-columns:minmax(240px,1fr) minmax(220px,.9fr);gap:15px;align-items:center;margin:15px 0;padding:15px;background:#14283b;color:#eef5ef}
+.hash-example .section-index{display:block;margin-bottom:8px;color:#91ccb4;font-size:8px;line-height:1.6}
+.hash-example code{display:block;overflow-wrap:anywhere;color:#eff7ef;font:10px/1.8 var(--mono)}
+.hash-example p{margin:0;color:#c5d3cc;font-size:10px;line-height:1.7}
+.study-question{margin:8px 0;background:var(--white);border:1px solid #e0e5de}
+.study-question summary{padding:12px 14px;color:#344f48;font-size:11px;font-weight:600;cursor:pointer}
+.study-question p{margin:0;padding:0 14px 13px;color:#607168;font-size:11px;line-height:1.75}
+.evaluation-references{margin:23px 0 14px;padding:15px 17px;background:#f0f2ed;border:1px solid #e0e4dc}
+.evaluation-references>.section-index{color:var(--teal)}
+.evaluation-references ul{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px 20px;margin:11px 0 0;padding-left:17px;color:#839087;font-size:10px}
+.evaluation-references a{color:#376e64;text-underline-offset:2px}
+.evaluation-back{display:inline-block;margin:8px 0 12px;color:var(--teal);font-size:11px;font-weight:600;text-decoration:none}
+.evaluation-back:hover{text-decoration:underline}
+@media(max-width:780px){.evaluation-cards{grid-template-columns:1fr 1fr}.evaluation-flow{justify-content:flex-start}.evaluation-flow i:last-of-type{display:none}}
+@media(max-width:560px){.evaluation-cards{grid-template-columns:1fr}.evaluation-summary{padding:15px}.evaluation-summary>p{font-size:14px}.evaluation-flow{gap:6px}.evaluation-flow span{font-size:9px}.evaluation-index{gap:5px}.evaluation-index a{font-size:8px}.evaluation-section-title h2{font-size:22px}.evaluation-table{min-width:680px}.hash-example{grid-template-columns:1fr}.evaluation-references ul{grid-template-columns:1fr}}

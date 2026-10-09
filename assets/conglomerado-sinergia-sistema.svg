@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 390" role="img" aria-labelledby="title desc">
+  <title id="title">Del conglomerado al sistema mediante sinergia</title>
+  <desc id="desc">Elementos de un servicio de préstamo bibliotecario se agrupan, se conectan mediante interacciones y producen un sistema organizado con un propósito.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="strokeWidth">
+      <path d="M0 0 10 5 0 10z" fill="#287e78"/>
+    </marker>
+    <style>
+      .bg{fill:#fffefa}.panel{fill:#f5f7f2;stroke:#dce5dc;stroke-width:2}.panel2{fill:#eef5f1;stroke:#a9cbbb;stroke-width:2}.head{font:600 17px 'Segoe UI',sans-serif;letter-spacing:1.5px;fill:#287e78}.title{font:600 19px 'Segoe UI',sans-serif;fill:#14283b}.label{font:500 15px 'Segoe UI',sans-serif;fill:#30485a}.small{font:13px 'Segoe UI',sans-serif;fill:#718078}.card{fill:#fffefa;stroke:#cddbd2;stroke-width:1.5}.edge{fill:none;stroke:#6f9f8e;stroke-width:2.5;marker-end:url(#arrow)}.dot{fill:#287e78;stroke:#fffefa;stroke-width:3}.equation{font:600 18px 'Segoe UI',sans-serif;fill:#14283b}
+    </style>
+  </defs>
+  <rect class="bg" x="0" y="0" width="960" height="390" rx="8"/>
+  <text class="head" x="480" y="33" text-anchor="middle">DE ELEMENTOS AGRUPADOS A UN SISTEMA</text>
+  <rect class="panel" x="24" y="62" width="278" height="258" rx="8"/>
+  <text class="title" x="163" y="92" text-anchor="middle">Conglomerado</text>
+  <text class="small" x="163" y="113" text-anchor="middle">elementos reunidos</text>
+  <rect class="card" x="54" y="136" width="218" height="42" rx="5"/><text class="label" x="163" y="162" text-anchor="middle">Lectores</text>
+  <rect class="card" x="54" y="190" width="218" height="42" rx="5"/><text class="label" x="163" y="216" text-anchor="middle">Personal y reglas</text>
+  <rect class="card" x="54" y="244" width="218" height="42" rx="5"/><text class="label" x="163" y="270" text-anchor="middle">Catálogo y ejemplares</text>
+  <text class="equation" x="330" y="199" text-anchor="middle">+</text>
+  <rect class="panel2" x="365" y="62" width="230" height="258" rx="8"/>
+  <text class="title" x="480" y="92" text-anchor="middle">Sinergia</text>
+  <text class="small" x="480" y="113" text-anchor="middle">relaciones e interacción</text>
+  <path class="edge" d="M408 164 470 205"/><path class="edge" d="M552 164 490 205"/><path class="edge" d="M408 256 470 215"/><path class="edge" d="M552 256 490 215"/>
+  <circle class="dot" cx="408" cy="157" r="15"/><circle class="dot" cx="552" cy="157" r="15"/><circle class="dot" cx="408" cy="263" r="15"/><circle class="dot" cx="552" cy="263" r="15"/><circle class="dot" cx="480" cy="210" r="24"/>
+  <text class="small" x="480" y="300" text-anchor="middle">coordinar búsqueda, préstamo y devolución</text>
+  <path class="edge" d="M607 191h52"/><text class="equation" x="635" y="171" text-anchor="middle">=</text>
+  <rect class="panel" x="668" y="62" width="268" height="258" rx="8"/>
+  <text class="title" x="802" y="92" text-anchor="middle">Sistema de préstamo</text>
+  <text class="small" x="802" y="113" text-anchor="middle">elementos organizados</text>
+  <rect class="card" x="698" y="137" width="208" height="48" rx="5"/><text class="label" x="802" y="167" text-anchor="middle">Buscar un libro</text>
+  <path class="edge" d="M802 188v20"/>
+  <rect class="card" x="698" y="214" width="208" height="48" rx="5"/><text class="label" x="802" y="244" text-anchor="middle">Registrar el préstamo</text>
+  <text class="small" x="802" y="288" text-anchor="middle">propósito: facilitar y controlar el servicio</text>
+  <text class="small" x="480" y="362" text-anchor="middle">Esquema didáctico; muestra relaciones, no una ecuación matemática.</text>
+</svg>
