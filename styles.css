@@ -686,3 +686,20 @@ body{font-size:15px;line-height:1.65;font-optical-sizing:auto}
 .evaluation-back:hover{text-decoration:underline}
 @media(max-width:780px){.evaluation-cards{grid-template-columns:1fr 1fr}.evaluation-flow{justify-content:flex-start}.evaluation-flow i:last-of-type{display:none}}
 @media(max-width:560px){.evaluation-cards{grid-template-columns:1fr}.evaluation-summary{padding:15px}.evaluation-summary>p{font-size:14px}.evaluation-flow{gap:6px}.evaluation-flow span{font-size:9px}.evaluation-index{gap:5px}.evaluation-index a{font-size:8px}.evaluation-section-title h2{font-size:22px}.evaluation-table{min-width:680px}.hash-example{grid-template-columns:1fr}.evaluation-references ul{grid-template-columns:1fr}}
+
+.local-build-entry{max-width:780px;margin:0 0 27px;padding:20px 22px;display:flex;align-items:center;justify-content:space-between;gap:20px;background:linear-gradient(115deg,#e7f0e9 0%,#f6f4ec 65%,#f4e9d7 100%);border:1px solid #c9dbce;border-left:4px solid #347f73}
+.build-entry-copy{max-width:480px}
+.build-entry-copy h2{margin:6px 0 5px;color:#173b43;font:500 21px/1.25 var(--serif)}
+.build-entry-copy>p{margin:0;color:#62766f;font-size:10px;line-height:1.65}
+.build-entry-copy details{margin-top:8px;color:#66796e;font-size:9px}
+.build-entry-copy summary{width:max-content;color:#347f73;cursor:pointer;font-weight:600}
+.build-entry-copy details p{margin:5px 0 0;line-height:1.6}
+.build-entry-button{flex:none;min-height:43px;padding:0 15px;display:inline-flex;align-items:center;gap:10px;background:#173b43;color:#f3f6ef;text-decoration:none;font-size:10px;font-weight:600;transition:background .15s,transform .15s}
+.build-entry-button:hover{background:#286b61;transform:translateY(-1px)}
+.build-entry-button span{color:#9bd2b8;font-size:16px}
+@media(max-width:560px){.local-build-entry{align-items:stretch;flex-direction:column;padding:17px}.build-entry-copy h2{font-size:19px}.build-entry-button{justify-content:center}}
+.project-progress-entry{max-width:780px;margin:0 0 24px;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;gap:18px;background:#f5f2e9;border:1px solid #d7d0bd;border-left:4px solid #52776b}
+.project-progress-entry h2{margin:5px 0;color:#243d3a;font:500 19px/1.25 var(--serif)}
+.project-progress-entry p{margin:0;color:#66736d;font-size:10px;line-height:1.6}
+.project-progress-entry>a{flex:none;color:#244f45;font-size:10px;font-weight:700;text-decoration:underline;text-underline-offset:3px}
+@media(max-width:560px){.project-progress-entry{align-items:flex-start;flex-direction:column}}

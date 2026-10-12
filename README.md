@@ -1,12 +1,19 @@
-# Cuaderno de Sistemas de Información I
+# Cuaderno y espacio de proyecto de Sistemas de Información I
 
-Página estática de consulta para conceptos y registros diarios. GitHub Pages publica el contenido directamente desde la rama `main`, en la carpeta raíz. No requiere servidor ni ejecución local.
+La página del curso se publica en GitHub Pages como acceso al material académico y al espacio de trabajo local. El espacio Build se ejecuta en el equipo del estudiante y conserva su información en una base de datos SQLite local.
 
-## Actualizar una jornada
+## Iniciar el espacio de proyecto
 
-1. Añade conceptos al arreglo `concepts` de `conceptos.js`.
-2. Mantén el estado «Síntesis inicial · por contrastar» hasta cotejar los conceptos con el material del docente.
-3. Actualiza el resumen diario de `index.html` cuando registremos una nueva clase.
-4. Mantén los cambios preparados en local durante la jornada. Súbelos a Git y publícalos solo cuando el estudiante indique «registra en git» para cerrar la jornada.
+En Windows, ejecuta build-local/iniciar.bat. Se abrirá el navegador en http://127.0.0.1:8766. Mantén abierta la ventana del servidor mientras trabajas. La página de GitHub solo puede abrir el espacio cuando el servidor local está activo.
 
-La publicación contiene solo los archivos de consulta del sitio. Los apuntes y evidencias completos permanecen en el espacio documental de la materia.
+## Datos y privacidad
+
+El archivo build-local/data/build.sqlite3 conserva la idea, versiones y agenda. Se crea al iniciar la aplicación y está excluido de Git. El servidor se enlaza únicamente a 127.0.0.1; no se publica como servicio en internet.
+
+La interfaz no usa IA todavía. En esta etapa registra y organiza respuestas localmente. El proveedor de IA, las condiciones de privacidad y el uso de información externa quedan para una etapa posterior.
+
+La base SQLite solo guarda el informe de acompañamiento. No determina la tecnología ni la base de datos del sistema final del estudiante.
+
+## Publicación
+
+GitHub Pages publica los archivos del cuaderno y del lanzador de Build. No ejecutar el flujo de publicación automática de documentos para actualizar cambios del sitio; los cambios del sitio se revisan y se publican como una unidad cuando el estudiante cierre la etapa.

@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#122b39">
+  <meta name="description" content="Espacio local para guiar y documentar el proyecto final de Sistemas de Información I.">
+  <title>Espacio de proyecto · Sistemas de Información I</title>
+  <link rel="stylesheet" href="/build.css">
+  <script src="/build.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="wordmark" href="#inicio" aria-label="Espacio de proyecto, inicio">
+      <span class="mark" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span>SISTEMAS DE INFORMACIÓN <b>I</b></span>
+    </a>
+    <div class="topbar-right">
+      <span class="local-status" id="connection-status"><i></i><span>Conectando con tu espacio local…</span></span>
+      <a class="report-link" href="/api/report.md" download="registro-proyecto-final.md">Descargar informe ↗</a>
+    </div>
+  </header>
+
+  <main id="inicio">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow"><span>ESPACIO BUILD</span><b>·</b><span>ETAPA 01 DE 09</span></p>
+        <h1>Tu proyecto empieza<br>con <em>una pregunta.</em></h1>
+        <p class="hero-lead">Vamos a definir y documentar tu propio producto paso a paso. Cada respuesta quedará guardada en este equipo y formará parte del informe del proyecto.</p>
+        <div class="hero-tags"><span><i></i> trabajo local</span><span><i></i> avance guardado en SQLite</span><span><i></i> IA por integrar</span></div>
+      </div>
+      <div class="hero-art" aria-label="Ilustración de una ruta que conecta la idea con un sistema">
+        <svg viewBox="0 0 460 300" role="img" aria-labelledby="art-title art-desc">
+          <title id="art-title">Ruta de desarrollo del proyecto</title>
+          <desc id="art-desc">Una senda ascendente conecta la idea inicial con el sistema terminado, junto a etapas que se irán habilitando.</desc>
+          <defs>
+            <linearGradient id="pathGradient" x1="0" y1="1" x2="1" y2="0"><stop stop-color="#63b59d"/><stop offset="1" stop-color="#e8b66e"/></linearGradient>
+            <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#d6e1d8" stroke-width="1"/></pattern>
+          </defs>
+          <path class="art-ground" d="M30 258C93 228 103 157 171 170s83 62 137 24 59-91 122-116v177H30z"/>
+          <path d="M30 30h400v240H30z" fill="url(#grid)" opacity=".62"/>
+          <path class="art-route-shadow" d="M64 236c66 5 58-89 121-88s66 60 120 28 47-76 104-93"/>
+          <path class="art-route" d="M64 236c66 5 58-89 121-88s66 60 120 28 47-76 104-93"/>
+          <path class="art-dash" d="M64 236c66 5 58-89 121-88s66 60 120 28 47-76 104-93"/>
+          <g class="art-node art-node-active" transform="translate(64 236)"><circle r="23"/><path d="M-6 1l5 5 11-13"/></g>
+          <g class="art-node" transform="translate(185 148)"><circle r="15"/><path d="M0-6v12M-6 0h12"/></g>
+          <g class="art-node" transform="translate(305 176)"><circle r="15"/><path d="M0-6v12M-6 0h12"/></g>
+          <g class="art-node" transform="translate(409 83)"><circle r="22"/><path d="M-8 2h16M0-7v18"/></g>
+          <path class="art-sun" d="M368 50a15 15 0 1 0 30 0 15 15 0 0 0-30 0z"/>
+          <path class="art-sunbeam" d="M383 20v-9m0 78v-9m30-30h9m-78 0h9m51-21 7-7m-56 56 7-7m42 0 7 7m-56-56 7 7"/>
+          <text x="42" y="279">IDEA</text><text x="370" y="126">SISTEMA</text>
+        </svg>
+        <div class="art-caption"><span>01</span> una etapa a la vez</div>
+      </div>
+    </section>
+
+    <div class="layout">
+      <section class="work-column">
+        <article class="question-card" aria-labelledby="question-title">
+          <div class="card-topline"><span class="step-chip">PRIMER PASO</span><span id="draft-indicator">borrador sin guardar</span></div>
+          <h2 id="question-title">¿Qué producto o sistema te gustaría desarrollar?</h2>
+          <p class="question-help">Describe tu idea con tus palabras. Puede estar incompleta. Todavía no elegiremos tecnologías ni metodología.</p>
+          <label class="field-label" for="working-name">Nombre provisional <span>opcional</span></label>
+          <input id="working-name" class="text-input" maxlength="100" placeholder="Puedes definirlo más adelante">
+          <label class="field-label" for="initial-idea">Tu primera idea</label>
+          <textarea id="initial-idea" rows="5" maxlength="5000" placeholder="Me gustaría crear un sistema que ayude a…"></textarea>
+          <div class="field-footer"><span id="character-count">0 / 5000</span><span id="save-message" role="status" aria-live="polite"></span></div>
+          <div class="question-actions">
+            <p><b>¿No sabes por dónde empezar?</b> Piensa en una necesidad que hayas observado en una persona, grupo u organización.</p>
+            <button class="primary-button" id="save-idea" type="button">Guardar y continuar <span aria-hidden="true">↗</span></button>
+          </div>
+        </article>
+
+        <section class="agenda-card" aria-labelledby="agenda-title">
+          <div class="section-heading">
+            <div><p class="eyebrow">ORGANIZA EL AVANCE</p><h2 id="agenda-title">Agenda de trabajo</h2></div>
+            <span class="agenda-count" id="agenda-count">0 tareas</span>
+          </div>
+          <p class="section-intro">Registra qué quieres revisar o preparar. La fecha es opcional; no se asignan fechas automáticamente.</p>
+          <form class="agenda-form" id="agenda-form">
+            <label class="sr-only" for="agenda-title-input">Nueva tarea</label>
+            <input id="agenda-title-input" class="text-input" maxlength="180" placeholder="Ej.: consultar la consigna del proyecto con el docente" required>
+            <label class="sr-only" for="agenda-date">Fecha prevista, opcional</label>
+            <input id="agenda-date" class="date-input" type="date" aria-label="Fecha prevista, opcional">
+            <button class="add-button" type="submit" aria-label="Agregar tarea">+</button>
+          </form>
+          <ul class="agenda-list" id="agenda-list" aria-live="polite"></ul>
+          <p class="empty-state" id="agenda-empty">Tu agenda aparecerá aquí cuando agregues la primera tarea.</p>
+        </section>
+
+        <section class="history-card" aria-labelledby="history-title">
+          <div class="section-heading">
+            <div><p class="eyebrow">INFORME DEL PROYECTO</p><h2 id="history-title">Historial de cambios</h2></div>
+            <span class="version-count" id="version-count">0 versiones</span>
+          </div>
+          <p class="section-intro">Cada vez que guardes una idea distinta, se conservará una versión. El informe se puede descargar en Markdown.</p>
+          <ol class="version-list" id="version-list"></ol>
+          <p class="empty-state" id="versions-empty">La primera versión se crea al guardar tu idea.</p>
+        </section>
+      </section>
+
+      <aside class="roadmap-card" aria-labelledby="roadmap-title">
+        <div class="roadmap-head"><p class="eyebrow">RUTA DEL PRODUCTO</p><h2 id="roadmap-title">Del problema al sistema</h2><p>El recorrido completo se ve desde el inicio. Solo la primera etapa está activa por ahora.</p></div>
+        <ol class="roadmap" id="roadmap">
+          <li class="roadmap-item is-current"><span class="roadmap-marker">01</span><details open><summary><span>Descubrir la necesidad</span><small id="idea-stage-status">EN CURSO</small></summary><div class="roadmap-detail"><p>Expresar qué producto o sistema imaginas y qué necesidad observaste.</p><b>Resultado:</b> idea inicial registrada como borrador.</div></details></li>
+          <li class="roadmap-item"><span class="roadmap-marker">02</span><details><summary><span>Comprender el contexto</span><small>PENDIENTE</small></summary><div class="roadmap-detail"><p>Identificar quién tiene la necesidad, cómo se resuelve hoy y qué evidencia existe.</p><b>Resultado:</b> contexto, actores y fuentes por consultar.</div></details></li>
+          <li class="roadmap-item"><span class="roadmap-marker">03</span><details><summary><span>Definir propósito y alcance</span><small>PENDIENTE</small></summary><div class="roadmap-detail"><p>Precisar objetivos, límites, restricciones, supuestos y lo que quedará fuera.</p><b>Resultado:</b> visión y alcance revisables con el docente.</div></details></li>
+          <li class="roadmap-item"><span class="roadmap-marker">04</span><details><summary><span>Especificar requisitos</span><small>PENDIENTE</small></summary><div class="roadmap-detail"><p>Formular requisitos funcionales y no funcionales que se puedan verificar.</p><b>Artefactos:</b> historias de usuario, casos de uso, criterios de aceptación y trazabilidad.</div></details></li>
+          <li class="roadmap-item"><span class="roadmap-marker">05</span><details><summary><span>Elegir el enfoque de trabajo</span><small>PENDIENTE</small></summary><div class="roadmap-detail"><p>Comparar opciones según el equipo, alcance y restricciones confirmadas. Scrum se analizará como marco de trabajo y XP por sus prácticas de ingeniería.</p><b>Resultado:</b> decisión justificada y artefactos adecuados.</div></details></li>
+          <li class="roadmap-item"><span class="roadmap-marker">06</span><details><summary><span>Modelar datos y solución</span><small>PENDIENTE</small></summary><div class="roadmap-detail"><p>Elaborar modelos E-R y UML, explorar arquitectura y revisar alternativas de base de datos.</p><b>Resultado:</b> modelos conectados a requisitos y decisiones documentadas.</div></details></li>
+          <li class="roadmap-item"><span class="roadmap-marker">07</span><details><summary><span>Construir por incrementos</span><small>PENDIENTE</small></summary><div class="roadmap-detail"><p>Planificar e implementar las partes frontend, backend y datos según el diseño acordado.</p><b>Resultado:</b> incrementos verificables y tareas con evidencia.</div></details></li>
+          <li class="roadmap-item"><span class="roadmap-marker">08</span><details><summary><span>Verificar y validar</span><small>PENDIENTE</small></summary><div class="roadmap-detail"><p>Comprobar requisitos, comportamiento, seguridad, tiempos de respuesta y resultados con usuarios.</p><b>Resultado:</b> evidencias de prueba, hallazgos y ajustes.</div></details></li>
+          <li class="roadmap-item"><span class="roadmap-marker">09</span><details><summary><span>Entregar y mantener</span><small>PENDIENTE</small></summary><div class="roadmap-detail"><p>Preparar documentación, despliegue, operación y mejoras futuras.</p><b>Resultado:</b> entrega trazable y plan de mantenimiento.</div></details></li>
+        </ol>
+        <div class="roadmap-note"><span class="note-glyph">i</span><p>El orden puede ajustarse cuando conozcamos la consigna. Las decisiones técnicas del sistema final siguen pendientes.</p></div>
+      </aside>
+    </div>
+
+    <footer class="local-footer"><span>ESPACIO PRIVADO EN ESTE EQUIPO</span><span id="last-saved">Los datos no salen de esta aplicación local.</span><a href="/api/report.md" download="registro-proyecto-final.md">Exportar registro ↗</a></footer>
+  </main>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
