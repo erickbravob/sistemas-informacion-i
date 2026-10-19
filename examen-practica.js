@@ -493,6 +493,138 @@ const practiceQuestionBank = [
     ],
     "a": 0,
     "e": "La Definition of Done es compartida para el incremento; los criterios verifican el comportamiento o alcance de una historia específica."
+  },
+  {
+    "q": "En el modelo entrada–proceso–salida, ¿qué representa la entrada?",
+    "o": ["Recursos, datos o información que el sistema recibe del entorno.", "El resultado que se entrega al entorno.", "La corrección que se realiza luego de una falla.", "El conjunto de pruebas de aceptación."],
+    "a": 0,
+    "e": "La entrada reúne los recursos, datos o información que llegan al sistema antes de su transformación."
+  },
+  {
+    "q": "¿Qué caracteriza a un sistema abierto?",
+    "o": ["Intercambia materia, energía o información con su entorno.", "Tiene necesariamente muchos componentes.", "Funciona siempre sin personas.", "No recibe entradas ni produce salidas."],
+    "a": 0,
+    "e": "En el material de Teoría General de Sistemas, un sistema abierto intercambia con el entorno."
+  },
+  {
+    "q": "¿Cómo se relacionan un macrosistema y sus subsistemas?",
+    "o": ["El macrosistema integra subsistemas relacionados cuyo desempeño afecta al propósito general.", "El macrosistema es siempre un componente aislado.", "Los subsistemas no tienen funciones propias.", "Un macrosistema solo puede ser una computadora."],
+    "a": 0,
+    "e": "Un subsistema cumple funciones propias y contribuye al sistema mayor del que forma parte."
+  },
+  {
+    "q": "¿Cuál es una clasificación de sistemas de información presentada en clase?",
+    "o": ["TPS, MIS, DSS y EIS según la función que cumplen.", "Cascada, espiral, Scrum y Kanban.", "Abierto, simple, manual y natural.", "Entrada, proceso, salida y control."],
+    "a": 0,
+    "e": "La presentación clasifica sistemas de información por función: transacciones, información gerencial, soporte a decisiones e información ejecutiva."
+  },
+  {
+    "q": "¿Qué describe principalmente un TPS?",
+    "o": ["Procesa las transacciones rutinarias diarias de una organización.", "Presenta solo indicadores ejecutivos de alto nivel.", "Elige automáticamente la metodología de desarrollo.", "Modela las relaciones entre clases UML."],
+    "a": 0,
+    "e": "Un sistema de procesamiento de transacciones registra y procesa operaciones habituales, como ventas."
+  },
+  {
+    "q": "¿Cuál orden representa correctamente fases comunes del ciclo de vida de un sistema?",
+    "o": ["Planeación, requisitos, diseño, desarrollo, pruebas, despliegue, mantenimiento y retirada.", "Pruebas, retirada, requisitos, planeación y diseño.", "Despliegue, diseño, planeación y requisitos.", "Desarrollo, mantenimiento y luego definición del problema."],
+    "a": 0,
+    "e": "El ciclo cubre desde identificar una necesidad hasta operar, mantener y retirar el sistema."
+  },
+  {
+    "q": "¿Qué distingue al modelo en cascada?",
+    "o": ["Organiza el trabajo en fases secuenciales y funciona mejor con requisitos estables.", "Organiza cada vuelta alrededor de un análisis de riesgos.", "Entrega trabajo continuo con límites WIP.", "Es una práctica de programación en pareja."],
+    "a": 0,
+    "e": "Cascada busca previsibilidad mediante fases y entregables; los cambios tardíos suelen ser costosos."
+  },
+  {
+    "q": "¿Qué aporta el modelo en V?",
+    "o": ["Relaciona niveles de requisitos y diseño con niveles de verificación y validación.", "Elimina las pruebas hasta después del despliegue.", "Reemplaza la planificación por un flujo sin límites.", "Define los cinco eventos de Scrum."],
+    "a": 0,
+    "e": "El modelo en V planifica pruebas asociadas a los distintos niveles del diseño y facilita trazabilidad."
+  },
+  {
+    "q": "¿Qué actividad es central en cada vuelta del modelo en espiral?",
+    "o": ["Identificar, evaluar y reducir riesgos antes de planificar la siguiente vuelta.", "Completar toda la documentación una sola vez al final.", "Evitar revisar alternativas técnicas.", "Limitar el trabajo en curso con un tablero Kanban."],
+    "a": 0,
+    "e": "La espiral organiza cada ciclo alrededor de objetivos, alternativas, riesgos, desarrollo y planificación."
+  },
+  {
+    "q": "¿Cuáles son las cuatro fases de RUP?",
+    "o": ["Inicio, elaboración, construcción y transición.", "Planeación, Scrum, Kanban y cierre.", "Análisis, TDD, pareja e integración.", "Preparación, riesgo, producto y mantenimiento."],
+    "a": 0,
+    "e": "RUP es iterativo e incremental; además se guía por casos de uso y se centra en la arquitectura."
+  },
+  {
+    "q": "¿Qué expresan los valores del Manifiesto Ágil?",
+    "o": ["Se valora más a las personas, el software funcionando, la colaboración y la respuesta al cambio, aunque los elementos de la derecha también tienen valor.", "La documentación y los contratos carecen de todo valor.", "Se debe evitar toda planificación y medición.", "Scrum debe usarse en cualquier proyecto."],
+    "a": 0,
+    "e": "El Manifiesto prioriza los elementos de la izquierda sin declarar inútiles los de la derecha."
+  },
+  {
+    "q": "¿Qué resultado busca Scrum al terminar un Sprint?",
+    "o": ["Un incremento útil que cumpla la Definición de Terminado.", "Una lista de tareas sin verificar.", "Un tablero de tareas sin producto integrado.", "Un documento final que sustituye la colaboración."],
+    "a": 0,
+    "e": "El incremento debe ser utilizable y cumplir la Definición de Terminado acordada."
+  },
+  {
+    "q": "¿Qué compromiso corresponde al Product Backlog?",
+    "o": ["La Meta del Producto.", "La Meta del Sprint.", "La Definición de Terminado.", "El límite WIP."],
+    "a": 0,
+    "e": "En Scrum, Product Backlog se vincula con la Meta del Producto; Sprint Backlog con la Meta del Sprint; Incremento con la Definición de Terminado."
+  },
+  {
+    "q": "¿Para qué limita Kanban el trabajo en curso (WIP)?",
+    "o": ["Para evitar saturación y ayudar a gestionar el flujo del trabajo.", "Para fijar la duración de cada Sprint.", "Para asignar obligatoriamente los roles de Scrum.", "Para posponer toda retroalimentación."],
+    "a": 0,
+    "e": "Limitar WIP hace visible la capacidad y ayuda a identificar bloqueos y mejorar el flujo."
+  },
+  {
+    "q": "¿Qué es Jira en relación con Scrum y Kanban?",
+    "o": ["Una herramienta que puede apoyar su planificación y seguimiento.", "Una metodología ágil con roles y eventos propios.", "Una práctica de pruebas antes del código.", "Un modelo de ciclo de vida predictivo."],
+    "a": 0,
+    "e": "Jira ofrece tableros, backlog, seguimiento e informes; la herramienta no define la metodología."
+  },
+  {
+    "q": "¿Cómo pueden complementarse Scrum y XP?",
+    "o": ["Scrum puede organizar el trabajo del equipo y XP aportar prácticas técnicas como TDD e integración continua.", "XP reemplaza toda necesidad de pruebas.", "Scrum define cómo escribir cada línea de código.", "No pueden combinarse porque resuelven exactamente el mismo nivel de trabajo."],
+    "a": 0,
+    "e": "Scrum organiza el trabajo y la inspección del producto; XP aporta prácticas de ingeniería que pueden fortalecer la calidad técnica."
+  },
+  {
+    "q": "En programación en pareja, ¿qué hacen el conductor y el navegante?",
+    "o": ["El conductor escribe; el navegante revisa, piensa el diseño y detecta problemas; luego intercambian roles.", "Ambos trabajan aislados en módulos sin revisar.", "El navegante asigna los roles de Scrum.", "El conductor escribe pruebas solo al final."],
+    "a": 0,
+    "e": "La práctica combina escritura y revisión continua, con intercambio frecuente de roles."
+  },
+  {
+    "q": "¿Cuál es el ciclo de TDD?",
+    "o": ["Escribir una prueba que falla, escribir el código mínimo para pasarla y refactorizar.", "Diseñar todo, desplegar y luego decidir qué probar.", "Planificar, estimar, revisar y retirar.", "Integrar, documentar, posponer las pruebas y publicar."],
+    "a": 0,
+    "e": "TDD suele describirse como rojo, verde y refactorizar."
+  },
+  {
+    "q": "¿Qué práctica corresponde a integración continua?",
+    "o": ["Integrar cambios con frecuencia y ejecutar construcciones y pruebas automáticas para detectar errores pronto.", "Agrupar todas las integraciones para el último día.", "Evitar automatizar las verificaciones.", "Usar un tablero visual sin integrar el código."],
+    "a": 0,
+    "e": "La integración frecuente con una construcción y pruebas automáticas reduce el tiempo hasta detectar problemas."
+  },
+  {
+    "q": "¿Qué organiza FDD?",
+    "o": ["El desarrollo en funcionalidades pequeñas con valor, usando cinco procesos y seguimiento por funcionalidades terminadas.", "El trabajo en Sprints sin roles ni producto.", "La verificación de cada nivel en un modelo en V.", "La programación de dos personas en un mismo puesto."],
+    "a": 0,
+    "e": "FDD significa Feature-Driven Development y hace visible el avance mediante funcionalidades completadas."
+  },
+  {
+    "q": "¿Cuándo suele convenir más un enfoque predictivo o híbrido?",
+    "o": ["Cuando los requisitos son estables, hay alcance contractual cerrado o se necesita verificación y documentación formal.", "Siempre que el cliente pueda cambiar prioridades cada día.", "Cuando no se requiere plan ni control.", "Solo cuando el equipo usa Jira."],
+    "a": 0,
+    "e": "La elección depende de requisitos, participación del cliente, equipo, riesgo, normativa y contrato."
+  },
+  {
+    "q": "Un sistema para equipo médico debe demostrar que cada requisito fue probado y cumplir regulación. ¿Qué enfoque del material es adecuado como punto de partida?",
+    "o": ["Modelo en V, con trazabilidad e iteraciones controladas según el riesgo.", "Kanban sin criterios de verificación.", "Scrumban por ser una opción universal.", "Programación en pareja como único modelo de ciclo de vida."],
+    "a": 0,
+    "e": "El ejemplo de la presentación asocia sistemas regulados y críticos con el modelo en V, que vincula diseño y pruebas."
   }
 ];
 let currentPracticeAttempt = [];
