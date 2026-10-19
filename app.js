@@ -447,6 +447,8 @@ function renderPage() {
     renderClassDay(selectedClassDay);
   } else if (slug === 'ruta') {
     renderRoadmap();
+  } else if (slug === 'examen-practica') {
+    renderPracticeExam();
   } else if (slug === 'evaluacion-1') {
     renderEvaluation1();
   } else if (slug === 'actividad-1') {
