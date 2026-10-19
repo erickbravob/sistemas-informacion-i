@@ -5,6 +5,7 @@ $courseRoot = Split-Path -Parent $siteRepo
 $logPath = Join-Path $courseRoot '.auto-publicar-actividad-1\publicacion.log'
 $documents = @(
   [pscustomobject]@{ Source = (Join-Path $courseRoot 'Docs\TEORIA GENERAL DE SISTEMAS.pptx'); RelativePath = 'materiales/teoria-general-sistemas-2026-10-02.pptx' },
+  [pscustomobject]@{ Source = (Join-Path $courseRoot 'Docs\Actividad2_Metodologias.pptx'); RelativePath = 'materiales/actividad-2/actividad2-metodologias.pptx' },
   [pscustomobject]@{ Source = (Join-Path $courseRoot 'Docs\Actividad 1\Informe\Informe_Actividad1_SistemasInformacionI.docx'); RelativePath = 'materiales/actividad-1/informe-actividad-1.docx' },
   [pscustomobject]@{ Source = (Join-Path $courseRoot 'Docs\Actividad 1\Diapositivas\Publicadas\tema-01-uml-requisitos-v26.pptx'); RelativePath = 'materiales/actividad-1/tema-01-uml-requisitos-v26.pptx' },
   [pscustomobject]@{ Source = (Join-Path $courseRoot 'Docs\Actividad 1\Diapositivas\Publicadas\tema-02-actores-casos-v10.pptx'); RelativePath = 'materiales/actividad-1/tema-02-actores-casos-v10.pptx' },
@@ -96,7 +97,7 @@ if ($Once) {
   if ($script:publishFailed) { exit 1 }
   exit 0
 }
-Write-Log 'Watching all six site-hosted downloadable files.'
+Write-Log 'Watching all seven site-hosted downloadable files.'
 while ($true) {
   $event = Wait-Event -Timeout 300
   if ($null -ne $event) {
